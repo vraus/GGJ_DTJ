@@ -844,7 +844,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: Mask
-  metroPackageVersion: 
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -852,7 +852,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Mask
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: Mask
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
@@ -921,11 +921,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 67e732a9-e336-417a-afa4-2ff09ee5b989
+  cloudProjectId: 5eef9f1d-612d-4628-b9fe-1fb3a4da3069
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Mask
-  organizationId: chev3
+  projectName: GGJ
+  organizationId: tantepoeme
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
