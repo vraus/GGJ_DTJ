@@ -25,10 +25,10 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Flicker: 0.095
-    - _Grain: 0.042
-    - _Scratches: 0.155
-    - _Vignette: 0.403
+    - _Flicker: 0
+    - _Grain: 0.006
+    - _Scratches: 0.01
+    - _Vignette: 0.324
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
