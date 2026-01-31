@@ -1,29 +1,41 @@
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Locomotion Variables")]
-    [SerializeField] float playerSpeed = 5.0f;
+    [SerializeField] float playerWalkSpeed = 5.0f;
+    [SerializeField] float playerSprintSpeed = 12.0f;
     [SerializeField] float jumpHeight = 1.5f;
     [SerializeField] float gravityValue = -9.81f;
+    bool isSprinting = false;
 
     [Header("Camera Look")]
     [SerializeField] float mouseSensitivity = 100.0f;
 
     [Header("Camera Bobbing")]
-    [SerializeField] float bobAmount = 0.05f;
-    [SerializeField] float bobSpeed = 8f;
-    [SerializeField] float bobSmoothing = 8f;
+    [SerializeField] float bobAmplitude = 0.05f;
+    [SerializeField] float bobFrequencyWalking = 8f;
+    [SerializeField] float bobFrequencyRunning = 20f;
+    [SerializeField] float bobSmoothing = 20f;
+    [SerializeField] private Transform _camera = null;
+    private Vector3 cameraStartPosition;
+
+    [Header("Stamina")]
+    [SerializeField] Slider staminaSlider;
+    [SerializeField] float maxStamina = 100;
+    [SerializeField] float staminaDrainRate = 30f;
+    [SerializeField] float staminaRegenRate = 15f;
+    [SerializeField] float staminaRegenThreshold = 2f;
+    float staminaRegenTimer = 0f;
+    float currentStamina;
 
     [Header("Collectibles")]
     [SerializeField] internal int MasksCollected = 0;
 
     Vector3 playerVelocity;
     bool groundedPlayer;
-    Vector3 initialCameraLocalPos;
-    float bobTimer = 0f;
     float xRotation = 0.0f;
     InputManager inputManager;
     Camera playerCamera;
@@ -36,17 +48,27 @@ public class PlayerController : MonoBehaviour
         playerCamera = GetComponentInChildren<Camera>();
 
         if (playerCamera != null)
-            initialCameraLocalPos = playerCamera.transform.localPosition;
+            cameraStartPosition = _camera.localPosition;
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        currentStamina = maxStamina;
+        staminaSlider.value = currentStamina;
     }
 
     void Update()
     {
+        Sprint();
+
+        Debug.Log("Sprinting: " + isSprinting);
+
         Vector3 move = MoveAndRotatePlayer();
-        controller.Move(move * playerSpeed * Time.deltaTime);
+        controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
+
         CameraBobbing(move);
         Jump();
+
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
@@ -81,6 +103,34 @@ public class PlayerController : MonoBehaviour
         return move;
     }
 
+    void Sprint()
+    {
+
+        if (inputManager.IsSprintPressed() && currentStamina > 0)
+        {
+            isSprinting = true;
+            currentStamina -= staminaDrainRate * Time.deltaTime;
+            if (currentStamina < 0)
+                currentStamina = 0;
+            staminaRegenTimer = 0;
+        }
+        else
+        {
+            isSprinting = false;
+            if (!inputManager.IsSprintPressed())
+            {
+                staminaRegenTimer += Time.deltaTime;
+                if (staminaRegenTimer >= staminaRegenThreshold)
+                    currentStamina += staminaRegenRate * Time.deltaTime;
+            }
+            if (currentStamina > maxStamina)
+                currentStamina = maxStamina;
+        }
+
+        if (staminaSlider != null)
+            staminaSlider.value = currentStamina;
+    }
+
     void Jump()
     {
         if (inputManager.IsJumpPressed() && groundedPlayer)
@@ -91,23 +141,29 @@ public class PlayerController : MonoBehaviour
 
     void CameraBobbing(Vector3 move)
     {
-        if (playerCamera != null)
+        if (_camera == null) return;
+
+        float speed = new Vector3(move.x, 0f, move.z).magnitude;
+
+        if (speed < 0.01f || !controller.isGrounded)
         {
-            float moveMagnitude = new Vector3(move.x, 0f, move.z).magnitude;
-            if (moveMagnitude > 0.01f && groundedPlayer)
-            {
-                bobTimer += Time.deltaTime * bobSpeed * moveMagnitude;
-                float bobOffset = Mathf.Sin(bobTimer) * bobAmount;
-                Vector3 targetPos = initialCameraLocalPos + new Vector3(0f, bobOffset, 0f);
-                playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, targetPos, Time.deltaTime * bobSmoothing);
-            }
-            else
-            {
-                playerCamera.transform.localPosition = Vector3.Lerp(playerCamera.transform.localPosition, initialCameraLocalPos, Time.deltaTime * bobSmoothing);
-                if (Mathf.Abs(playerCamera.transform.localPosition.y - initialCameraLocalPos.y) < 0.001f)
-                    bobTimer = 0f;
-            }
+            ResetCamera();
+            return;
         }
+
+        float bobY = Mathf.Sin(Time.time * (isSprinting ? bobFrequencyRunning : bobFrequencyWalking)) * bobAmplitude;
+        float bobX = Mathf.Cos(Time.time * (isSprinting ? bobFrequencyRunning : bobFrequencyWalking) / 2f) * bobAmplitude * 2f;
+
+        Vector3 targetPos = cameraStartPosition + new Vector3(bobX, bobY, 0f);
+
+
+        _camera.localPosition = Vector3.Lerp(_camera.localPosition, targetPos, Time.deltaTime * bobSmoothing);
+    }
+
+    private void ResetCamera()
+    {
+        if (_camera.localPosition == cameraStartPosition) return;
+        _camera.localPosition = Vector3.Lerp(_camera.localPosition, cameraStartPosition, Time.deltaTime * bobSmoothing);
     }
 
     internal void AddMask()
