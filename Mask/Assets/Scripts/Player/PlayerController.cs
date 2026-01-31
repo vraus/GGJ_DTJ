@@ -61,8 +61,6 @@ public class PlayerController : MonoBehaviour
     {
         Sprint();
 
-        Debug.Log("Sprinting: " + isSprinting);
-
         Vector3 move = MoveAndRotatePlayer();
         controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
 
