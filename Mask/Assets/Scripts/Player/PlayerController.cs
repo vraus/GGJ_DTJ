@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -11,12 +12,16 @@ public class PlayerController : MonoBehaviour
     [Header("Locomotion Variables")]
     [SerializeField] float playerWalkSpeed = 5.0f;
     [SerializeField] float playerSprintSpeed = 12.0f;
-    [SerializeField] float jumpHeight = 1.5f;
+    [SerializeField] float DashHeight = 1.5f;
     [SerializeField] float gravityValue = -9.81f;
     bool isSprinting = false;
 
     [Header("Camera Look")]
     [SerializeField] float mouseSensitivity = 100.0f;
+
+    [Header("Camera Shake")]
+    [SerializeField] float duration = 0.3f;
+    [SerializeField] float magnitude = 0.2f;
 
     [Header("Camera Bobbing")]
     [SerializeField] float bobAmplitude = 0.05f;
@@ -92,9 +97,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Sprint();
 
         Vector3 move = MoveAndRotatePlayer();
+        if (move.magnitude > 0.1f) Sprint();
         controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
 
         if (move.magnitude > 0)
@@ -103,7 +108,7 @@ public class PlayerController : MonoBehaviour
         }
 
         CameraBobbing(move);
-        Jump();
+        Dash();
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
@@ -141,7 +146,6 @@ public class PlayerController : MonoBehaviour
 
     void Sprint()
     {
-
         if (inputManager.IsSprintPressed() && currentStamina > 0)
         {
             isSprinting = true;
@@ -167,11 +171,11 @@ public class PlayerController : MonoBehaviour
             staminaSlider.value = currentStamina;
     }
 
-    void Jump()
+    void Dash()
     {
-        if (inputManager.IsJumpPressed() && groundedPlayer)
+        if (inputManager.IsDashPressed() && groundedPlayer)
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravityValue);
+            // Dash logic
         }
     }
 
@@ -205,10 +209,9 @@ public class PlayerController : MonoBehaviour
     void HandleFootsteps()
     {
         sin = Mathf.Sin(Time.time * (isSprinting ? runRate : walkRate));
-        if (sin > 0.97f && canPlayFootstep)
+        if (sin > 0.97f && canPlayFootstep && controller.isGrounded)
         {
             canPlayFootstep = false;
-            Debug.Log("Play Footstep");
             PlayWalkingFootstepSound();
         }
         else if (sin < 0f && !canPlayFootstep)
@@ -232,6 +235,31 @@ public class PlayerController : MonoBehaviour
         float volume = 1f;
 
         SoundFXManager.instance.PlayFootstep(footstepClip, transform.position, volume);
+    }
+
+    public void CameraShake(float magnitudeMultiplier = 1f)
+    {
+        magnitude *= magnitudeMultiplier;
+        StartCoroutine(ShakeCoroutine());
+    }
+
+    private IEnumerator ShakeCoroutine()
+    {
+        Vector3 originalPos = _camera.localPosition;
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            _camera.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        _camera.localPosition = originalPos;
     }
 
 }

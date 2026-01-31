@@ -50,9 +50,9 @@ public class InputManager : MonoBehaviour
         return _playerControls.Locomotion.Look.ReadValue<Vector2>();
     }
 
-    public bool IsJumpPressed()
+    public bool IsDashPressed()
     {
-        return _playerControls.Locomotion.Jump.triggered;
+        return _playerControls.Locomotion.Dash.triggered;
     }
 
     public bool IsCollectPressed()
