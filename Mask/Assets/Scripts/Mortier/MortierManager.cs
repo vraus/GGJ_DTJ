@@ -43,7 +43,7 @@ public class MortierManager : MonoBehaviour
         Vector3 playerPos = Player.transform.position;
         float radius = 5f;
         Vector2 randomCircle = Random.insideUnitCircle * radius;
-        Vector3 spawnPos = new Vector3(playerPos.x + randomCircle.x, 3f, playerPos.z + randomCircle.y);
+        Vector3 spawnPos = new Vector3(playerPos.x + randomCircle.x, MortierPlace.transform.position.y + 0.2f, playerPos.z + randomCircle.y);
 
         MortierShadow.transform.position = spawnPos;
         MortierShadow.transform.localScale = Vector3.one * 0.5f;
@@ -81,7 +81,29 @@ public class MortierManager : MonoBehaviour
         SoundFXManager.instance.PlayAudioClip(MortierExplosionSound, MortierShadow.transform, 1f);
         AudioClip impactClip = ExplostionImpacts[Random.Range(0, ExplostionImpacts.Length)];
         SoundFXManager.instance.PlayAudioClip(impactClip, MortierShadow.transform, .1f);
+        CheckDistanceToPlayer();
         Invoke("DisableMortierExplosion", 1f);
+    }
+
+    void CheckDistanceToPlayer()
+    {
+        float distance = Vector3.Distance(MortierExplosion.transform.position, Player.transform.position);
+        PlayerController playerController = Player.GetComponent<PlayerController>();
+        switch (distance)
+        {
+            case float d when d < 2f:
+                playerController.CameraShake(5f);
+                Debug.Log("Shake Max");
+                break;
+            case float d when d < 5f:
+                playerController.CameraShake(2f);
+                Debug.Log("Shake Medium");
+                break;
+            default:
+                playerController.CameraShake(1f);
+                Debug.Log("Shake Low");
+                break;
+        }
     }
 
     void SpawnSmokeEffect()

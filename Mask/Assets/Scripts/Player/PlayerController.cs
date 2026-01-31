@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -17,6 +18,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Camera Look")]
     [SerializeField] float mouseSensitivity = 100.0f;
+
+    [Header("Camera Shake")]
+    [SerializeField] float duration = 0.3f;
+    [SerializeField] float magnitude = 0.2f;
 
     [Header("Camera Bobbing")]
     [SerializeField] float bobAmplitude = 0.05f;
@@ -230,6 +235,31 @@ public class PlayerController : MonoBehaviour
         float volume = 1f;
 
         SoundFXManager.instance.PlayFootstep(footstepClip, transform.position, volume);
+    }
+
+    public void CameraShake(float magnitudeMultiplier = 1f)
+    {
+        magnitude *= magnitudeMultiplier;
+        StartCoroutine(ShakeCoroutine());
+    }
+
+    private IEnumerator ShakeCoroutine()
+    {
+        Vector3 originalPos = _camera.localPosition;
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            _camera.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        _camera.localPosition = originalPos;
     }
 
 }
