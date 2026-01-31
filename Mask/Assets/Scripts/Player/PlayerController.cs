@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
     [Header("Ladder")]
     [SerializeField] float ladderClimbSpeed = 3f;
     bool isOnLadder = false;
+    Vector3 UpLadder;
 
     float sin;
     bool canPlayFootstep = true;
@@ -114,16 +115,14 @@ public class PlayerController : MonoBehaviour
         Vector3 move = MoveAndRotatePlayer();
 
         // --- LADDERS ---
-        if (isOnLadder)
+        if (isOnLadder && UpLadder!=null)
         {
             // On annule la gravité
             playerVelocity.y = 0f;
 
-            // Si le joueur appuie vers l'avant
-            if (inputManager.GetPlayerMovement().y > 0.1f)
-            {
-                controller.Move(Vector3.up * ladderClimbSpeed * Time.deltaTime);
-            }
+            // Si le joueur se deplace
+            controller.Move(inputManager.GetPlayerMovement().y * UpLadder * ladderClimbSpeed * Time.deltaTime);
+            
         }
         else
         {
@@ -363,6 +362,7 @@ public class PlayerController : MonoBehaviour
         {
             isOnLadder = true;
             playerVelocity.y = 0f; // reset propre
+            UpLadder=other.transform.up;
         }
     }
 
