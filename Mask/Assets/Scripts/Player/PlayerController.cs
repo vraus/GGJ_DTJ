@@ -31,6 +31,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _camera = null;
     private Vector3 cameraStartPosition;
 
+    [Header("Death Camera")]
+    [SerializeField] float deathTiltAngleX = 60f;
+    [SerializeField] float deathTiltAngleZ = 20f;
+    [SerializeField] float deathDuration = 1.2f;
+    [SerializeField] float deathCameraDrop = 0.3f;
+
+
 
     [Header("Stamina")]
     [SerializeField] Slider staminaSlider;
@@ -229,6 +236,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void PlayerDeath()
+    {
+        inputManager.DisableAllInputs();
+        controller.enabled = false;
+
+        StopAllCoroutines();
+        StartCoroutine(DeathCameraCoroutine());
+
+        Debug.Log("Player has died.");
+    }
+
     public void PlayWalkingFootstepSound()
     {
         AudioClip footstepClip = walkFootstepClips[UnityEngine.Random.Range(0, walkFootstepClips.Length)];
@@ -261,5 +279,39 @@ public class PlayerController : MonoBehaviour
 
         _camera.localPosition = originalPos;
     }
+
+    private IEnumerator DeathCameraCoroutine()
+    {
+        Transform cam = _camera;
+
+        Quaternion startRot = cam.localRotation;
+        Vector3 startPos = cam.localPosition;
+
+        Quaternion targetRot = Quaternion.Euler(
+            deathTiltAngleX,
+            0f,
+            Random.Range(-deathTiltAngleZ, deathTiltAngleZ)
+        );
+
+        Vector3 targetPos = startPos + Vector3.down * deathCameraDrop;
+
+        float elapsed = 0f;
+
+        while (elapsed < deathDuration)
+        {
+            float t = elapsed / deathDuration;
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            cam.localRotation = Quaternion.Slerp(startRot, targetRot, t);
+            cam.localPosition = Vector3.Lerp(startPos, targetPos, t);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        cam.localRotation = targetRot;
+        cam.localPosition = targetPos;
+    }
+
 
 }

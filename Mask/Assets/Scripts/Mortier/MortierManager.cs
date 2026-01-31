@@ -93,15 +93,13 @@ public class MortierManager : MonoBehaviour
         {
             case float d when d < 2f:
                 playerController.CameraShake(5f);
-                Debug.Log("Shake Max");
+                playerController.PlayerDeath();
                 break;
             case float d when d < 5f:
                 playerController.CameraShake(2f);
-                Debug.Log("Shake Medium");
                 break;
             default:
                 playerController.CameraShake(1f);
-                Debug.Log("Shake Low");
                 break;
         }
     }

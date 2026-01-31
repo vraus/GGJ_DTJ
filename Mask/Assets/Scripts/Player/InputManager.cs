@@ -71,4 +71,9 @@ public class InputManager : MonoBehaviour
         return _playerControls.Locomotion.Drop.triggered;
     }
 
+    public void DisableAllInputs()
+    {
+        _playerControls.Disable();
+    }
+
 }
