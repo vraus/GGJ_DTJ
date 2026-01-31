@@ -466,6 +466,7 @@ MonoBehaviour:
   maxStamina: 100
   staminaDrainRate: 15
   staminaRegenRate: 10
+  staminaRegenThreshold: 2
   MasksCollected: 0
 --- !u!114 &829270091293475605
 MonoBehaviour:
