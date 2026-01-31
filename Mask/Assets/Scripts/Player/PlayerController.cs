@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             isSprinting = false;
-            if (!inputManager.IsSprintPressed())
+            if (!inputManager.IsSprintPressed() && currentStamina < maxStamina)
             {
                 staminaRegenTimer += Time.deltaTime;
                 if (staminaRegenTimer >= staminaRegenThreshold)
