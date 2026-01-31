@@ -142,9 +142,12 @@ MonoBehaviour:
   MortierExplosion: {fileID: 2424723396872249681}
   Player: {fileID: 0}
   SmokeEffect: {fileID: 96172203432422064}
-  MortierShoot: {fileID: 8300000, guid: 901e556e54001534d909fe612efe2785, type: 3}
   MortierTrail: {fileID: 8300000, guid: 5240e80fbaba0754ca363facd3f7d745, type: 3}
   MortierExplosionSound: {fileID: 8300000, guid: 13d9b9be30a771041ae1361f0c787f6d, type: 3}
+  ExplostionImpacts:
+  - {fileID: 8300000, guid: bbdc9cfaa88fca9488b019a98425b315, type: 3}
+  - {fileID: 8300000, guid: cb3833f2c718b7548b307cf0cfa977c0, type: 3}
+  - {fileID: 8300000, guid: 763098907dc0ca847946ab520955d0bd, type: 3}
 --- !u!1001 &95567226040555742
 PrefabInstance:
   m_ObjectHideFlags: 0

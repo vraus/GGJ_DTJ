@@ -12,6 +12,7 @@ public class MortierManager : MonoBehaviour
     [Header("Audio Assets")]
     [SerializeField] AudioClip MortierTrail;
     [SerializeField] AudioClip MortierExplosionSound;
+    [SerializeField] AudioClip[] ExplostionImpacts;
 
     private float spawnTimer = 0f;
     private float spawnInterval;
@@ -78,6 +79,8 @@ public class MortierManager : MonoBehaviour
         MortierShadow.SetActive(false);
         SpawnSmokeEffect();
         SoundFXManager.instance.PlayAudioClip(MortierExplosionSound, MortierShadow.transform, 1f);
+        AudioClip impactClip = ExplostionImpacts[Random.Range(0, ExplostionImpacts.Length)];
+        SoundFXManager.instance.PlayAudioClip(impactClip, MortierShadow.transform, .1f);
         Invoke("DisableMortierExplosion", 1f);
     }
 
