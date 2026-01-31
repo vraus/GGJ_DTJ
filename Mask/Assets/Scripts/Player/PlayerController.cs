@@ -233,10 +233,10 @@ public class PlayerController : MonoBehaviour
 
     internal void AddMask(Transform maskTransform)
     {
-        Debug.Log("Mask collected. Total: " + MasksCollected);
         if (MasksCollected < MaxMasksCarriable)
         {
             MasksCollected++;
+            Debug.Log("Mask collected. Total: " + MasksCollected);
             SoundFXManager.instance.PlayAudioClip(maskCollectClip, maskTransform, 1f);
         }
     }
