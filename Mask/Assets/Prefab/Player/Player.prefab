@@ -474,14 +474,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 144934eb782c2f84b81847fb778a3a6c, type: 3}
   - {fileID: 8300000, guid: 9c72d979160164145ad4f2d365a66416, type: 3}
   - {fileID: 8300000, guid: 814c5a0c0cb6c0b48881f665c80882a4, type: 3}
-  - {fileID: 8300000, guid: 3c6b051f77757174e89523d50f2b6eb3, type: 3}
   - {fileID: 8300000, guid: 06a4d39bb51705e438c5a1281493295e, type: 3}
   - {fileID: 8300000, guid: f1595aeb17df48a428e0acb3eff3732b, type: 3}
   - {fileID: 8300000, guid: 61be37c3f6023854390d5d2c45483938, type: 3}
   - {fileID: 8300000, guid: b96b2925157f19746945c699e85651c3, type: 3}
-  - {fileID: 8300000, guid: 4247e4df4efdb414193c7ee7e77daf2c, type: 3}
   - {fileID: 8300000, guid: e1f47fb1a67382643a26001d0aa3f48c, type: 3}
   - {fileID: 8300000, guid: 35382558f97b81445b9039705075f642, type: 3}
+  walkStepRate: 0.5
+  runStepRate: 0.3
 --- !u!114 &829270091293475605
 MonoBehaviour:
   m_ObjectHideFlags: 0
