@@ -1,13 +1,15 @@
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Locomotion Variables")]
-    [SerializeField] float playerSpeed = 5.0f;
+    [SerializeField] float playerWalkSpeed = 5.0f;
+    [SerializeField] float playerSprintSpeed = 12.0f;
     [SerializeField] float jumpHeight = 1.5f;
     [SerializeField] float gravityValue = -9.81f;
+    bool isSprinting = false;
 
     [Header("Camera Look")]
     [SerializeField] float mouseSensitivity = 100.0f;
@@ -19,6 +21,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float bobSmoothing = 20f;
     [SerializeField] private Transform _camera = null;
     private Vector3 cameraStartPosition;
+
+    [Header("Stamina")]
+    [SerializeField] Slider staminaSlider;
+    [SerializeField] float maxStamina = 100;
+    [SerializeField] float staminaDrainRate = 30f;
+    [SerializeField] float staminaRegenRate = 15f;
+    [SerializeField] float staminaRegenThreshold = 2f;
+    float staminaRegenTimer = 0f;
+    float currentStamina;
 
     [Header("Collectibles")]
     [SerializeField] internal int MasksCollected = 0;
@@ -41,14 +52,23 @@ public class PlayerController : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        currentStamina = maxStamina;
+        staminaSlider.value = currentStamina;
     }
 
     void Update()
     {
+        Sprint();
+
+        Debug.Log("Sprinting: " + isSprinting);
+
         Vector3 move = MoveAndRotatePlayer();
-        controller.Move(move * playerSpeed * Time.deltaTime);
+        controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
+
         CameraBobbing(move);
         Jump();
+
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
@@ -83,6 +103,34 @@ public class PlayerController : MonoBehaviour
         return move;
     }
 
+    void Sprint()
+    {
+
+        if (inputManager.IsSprintPressed() && currentStamina > 0)
+        {
+            isSprinting = true;
+            currentStamina -= staminaDrainRate * Time.deltaTime;
+            if (currentStamina < 0)
+                currentStamina = 0;
+            staminaRegenTimer = 0;
+        }
+        else
+        {
+            isSprinting = false;
+            if (!inputManager.IsSprintPressed())
+            {
+                staminaRegenTimer += Time.deltaTime;
+                if (staminaRegenTimer >= staminaRegenThreshold)
+                    currentStamina += staminaRegenRate * Time.deltaTime;
+            }
+            if (currentStamina > maxStamina)
+                currentStamina = maxStamina;
+        }
+
+        if (staminaSlider != null)
+            staminaSlider.value = currentStamina;
+    }
+
     void Jump()
     {
         if (inputManager.IsJumpPressed() && groundedPlayer)
@@ -103,8 +151,8 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        float bobY = Mathf.Sin(Time.time * bobFrequencyWalking) * bobAmplitude;
-        float bobX = Mathf.Cos(Time.time * bobFrequencyWalking / 2f) * bobAmplitude * 2f;
+        float bobY = Mathf.Sin(Time.time * (isSprinting ? bobFrequencyRunning : bobFrequencyWalking)) * bobAmplitude;
+        float bobX = Mathf.Cos(Time.time * (isSprinting ? bobFrequencyRunning : bobFrequencyWalking) / 2f) * bobAmplitude * 2f;
 
         Vector3 targetPos = cameraStartPosition + new Vector3(bobX, bobY, 0f);
 

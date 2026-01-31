@@ -58,4 +58,9 @@ public class InputManager : MonoBehaviour
         return _playerControls.Locomotion.Collect.triggered;
     }
 
+    public bool IsSprintPressed()
+    {
+        return _playerControls.Locomotion.Sprint.ReadValue<float>() > 0.5f;
+    }
+
 }
