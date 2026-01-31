@@ -52,7 +52,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "InGameMenu",
+                    "name": "Pause",
                     "type": "Button",
                     "id": "809c8133-f386-4230-82cf-170d0bdd674b",
                     "expectedControlType": "",
@@ -177,7 +177,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
-                    "action": "InGameMenu",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

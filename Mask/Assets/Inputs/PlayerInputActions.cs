@@ -138,7 +138,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""InGameMenu"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""809c8133-f386-4230-82cf-170d0bdd674b"",
                     ""expectedControlType"": """",
@@ -263,7 +263,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard"",
-                    ""action"": ""InGameMenu"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -302,7 +302,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Locomotion_Dash = m_Locomotion.FindAction("Dash", throwIfNotFound: true);
         m_Locomotion_Collect = m_Locomotion.FindAction("Collect", throwIfNotFound: true);
         m_Locomotion_Sprint = m_Locomotion.FindAction("Sprint", throwIfNotFound: true);
-        m_Locomotion_InGameMenu = m_Locomotion.FindAction("InGameMenu", throwIfNotFound: true);
+        m_Locomotion_Pause = m_Locomotion.FindAction("Pause", throwIfNotFound: true);
         m_Locomotion_Drop = m_Locomotion.FindAction("Drop", throwIfNotFound: true);
     }
 
@@ -389,7 +389,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Locomotion_Dash;
     private readonly InputAction m_Locomotion_Collect;
     private readonly InputAction m_Locomotion_Sprint;
-    private readonly InputAction m_Locomotion_InGameMenu;
+    private readonly InputAction m_Locomotion_Pause;
     private readonly InputAction m_Locomotion_Drop;
     /// <summary>
     /// Provides access to input actions defined in input action map "Locomotion".
@@ -423,9 +423,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Sprint => m_Wrapper.m_Locomotion_Sprint;
         /// <summary>
-        /// Provides access to the underlying input action "Locomotion/InGameMenu".
+        /// Provides access to the underlying input action "Locomotion/Pause".
         /// </summary>
-        public InputAction @InGameMenu => m_Wrapper.m_Locomotion_InGameMenu;
+        public InputAction @Pause => m_Wrapper.m_Locomotion_Pause;
         /// <summary>
         /// Provides access to the underlying input action "Locomotion/Drop".
         /// </summary>
@@ -471,9 +471,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
-            @InGameMenu.started += instance.OnInGameMenu;
-            @InGameMenu.performed += instance.OnInGameMenu;
-            @InGameMenu.canceled += instance.OnInGameMenu;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
             @Drop.started += instance.OnDrop;
             @Drop.performed += instance.OnDrop;
             @Drop.canceled += instance.OnDrop;
@@ -503,9 +503,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
-            @InGameMenu.started -= instance.OnInGameMenu;
-            @InGameMenu.performed -= instance.OnInGameMenu;
-            @InGameMenu.canceled -= instance.OnInGameMenu;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
             @Drop.started -= instance.OnDrop;
             @Drop.performed -= instance.OnDrop;
             @Drop.canceled -= instance.OnDrop;
@@ -598,12 +598,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSprint(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "InGameMenu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnInGameMenu(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Drop" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

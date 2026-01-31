@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         currentStamina = maxStamina;
         staminaSlider.value = currentStamina;
 
-        inputManager.PlayerControls.Locomotion.InGameMenu.performed += ctx =>
+        inputManager.PlayerControls.Locomotion.Pause.performed += ctx =>
         {
             if (isGamePaused)
             {
