@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class SoundFXManager : MonoBehaviour
 {
-
     public static SoundFXManager instance { get; private set; }
 
-    [SerializeField] private AudioSource soundFXObject;
+    [SerializeField] private AudioSource footstepSourcePrefab;
+    public AudioSource FootstepSource { get; private set; }
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            CreateFootstepSource();
         }
         else
         {
@@ -19,16 +20,18 @@ public class SoundFXManager : MonoBehaviour
         }
     }
 
-    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume = 1.0f)
+    void CreateFootstepSource()
     {
-        AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
+        FootstepSource = Instantiate(footstepSourcePrefab, transform);
+        FootstepSource.loop = false;
+        FootstepSource.playOnAwake = false;
+        FootstepSource.spatialBlend = 1f;
+    }
 
-        audioSource.clip = audioClip;
-        audioSource.volume = volume;
-        audioSource.Play();
-
-        float clipLength = audioClip.length;
-        Destroy(audioSource.gameObject, clipLength);
-
+    public void PlayFootstep(AudioClip clip, Vector3 position, float volume)
+    {
+        FootstepSource.transform.position = position;
+        FootstepSource.volume = volume;
+        FootstepSource.PlayOneShot(clip);
     }
 }

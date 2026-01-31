@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,8 +22,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float bobSmoothing = 20f;
     [SerializeField] private Transform _camera = null;
     private Vector3 cameraStartPosition;
-    float previousBobY = 0f;
-    bool footstepPlayed = false;
 
 
     [Header("Stamina")]
@@ -39,6 +38,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioClip[] walkFootstepClips;
+    [SerializeField] float walkRate = 10f;
+    [SerializeField] float runRate = 20f;
+    float sin;
+    bool canPlayFootstep = true;
 
     Vector3 playerVelocity;
     bool groundedPlayer;
@@ -70,6 +73,11 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = MoveAndRotatePlayer();
         controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
+
+        if (move.magnitude > 0)
+        {
+            HandleFootsteps();
+        }
 
         CameraBobbing(move);
         Jump();
@@ -153,7 +161,6 @@ public class PlayerController : MonoBehaviour
         if (speed < 0.01f || !controller.isGrounded)
         {
             ResetCamera();
-            footstepPlayed = false;
             return;
         }
 
@@ -161,19 +168,6 @@ public class PlayerController : MonoBehaviour
 
         float bobY = Mathf.Sin(Time.time * frequency) * bobAmplitude;
         float bobX = Mathf.Cos(Time.time * frequency / 2f) * bobAmplitude * 2f;
-
-        if (previousBobY > bobY && bobY <= -bobAmplitude * 0.95f && !footstepPlayed)
-        {
-            PlayWalkingFootstepSound();
-            footstepPlayed = true;
-        }
-
-        if (bobY > 0f)
-        {
-            footstepPlayed = false;
-        }
-
-        previousBobY = bobY;
 
         Vector3 targetPos = cameraStartPosition + new Vector3(bobX, bobY, 0f);
         _camera.localPosition = Vector3.Lerp(_camera.localPosition, targetPos, Time.deltaTime * bobSmoothing);
@@ -185,6 +179,21 @@ public class PlayerController : MonoBehaviour
         _camera.localPosition = Vector3.Lerp(_camera.localPosition, cameraStartPosition, Time.deltaTime * bobSmoothing);
     }
 
+    void HandleFootsteps()
+    {
+        sin = Mathf.Sin(Time.time * (isSprinting ? runRate : walkRate));
+        if (sin > 0.97f && canPlayFootstep)
+        {
+            canPlayFootstep = false;
+            Debug.Log("Play Footstep");
+            PlayWalkingFootstepSound();
+        }
+        else if (sin < 0f && !canPlayFootstep)
+        {
+            canPlayFootstep = true;
+        }
+    }
+
     internal void AddMask()
     {
         MasksCollected++;
@@ -193,10 +202,10 @@ public class PlayerController : MonoBehaviour
 
     public void PlayWalkingFootstepSound()
     {
-        Debug.Log("Playing footstep sound");
-        AudioClip footstepClip = walkFootstepClips[Random.Range(0, walkFootstepClips.Length)];
-        float volume = 10f;
-        SoundFXManager.instance.PlaySoundFXClip(footstepClip, transform, volume);
+        AudioClip footstepClip = walkFootstepClips[UnityEngine.Random.Range(0, walkFootstepClips.Length)];
+        float volume = 1f;
+
+        SoundFXManager.instance.PlayFootstep(footstepClip, transform.position, volume);
     }
 
 }
