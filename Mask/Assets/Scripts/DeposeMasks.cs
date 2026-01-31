@@ -17,26 +17,19 @@ public class DeposeMasks : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
+    {
+        DeposesMasks(other);
+    }
+    void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            var pc = other.GetComponent<PlayerController>();
-            if (pc != null)
-            {
-                DropText.transform.LookAt(other.transform);
-                DropText.gameObject.SetActive(true);
-                DropText.transform.Rotate(0, 180, 0);
-            }
-            else
-            {
-                DropText.gameObject.SetActive(false);
-            }
-
+            DropText.gameObject.SetActive(false);
         }
     }
 
-    void OnTriggerStay(Collider other)
+    void DeposesMasks(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -54,10 +47,6 @@ public class DeposeMasks : MonoBehaviour
                     pc.MasksCollected--;
                     //soldats qui disent merci ?
                     //Bruit de dépot de masques
-                }
-                else
-                {
-                    DropText.gameObject.SetActive(false);
                 }
             }
         }
