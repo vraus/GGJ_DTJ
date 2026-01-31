@@ -48,7 +48,7 @@ public class CollectMask : MonoBehaviour
                 var pc = player.GetComponent<PlayerController>();
                 if (pc != null && pc.MasksCollected < pc.MaxMasksCarriable)
                 {
-                    pc.AddMask();
+                    pc.AddMask(transform);
                     Destroy(gameObject);
                 }
             }
