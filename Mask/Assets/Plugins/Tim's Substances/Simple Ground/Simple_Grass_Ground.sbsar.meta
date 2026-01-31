@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7f54b5ed9c1a13f468ae8660b62d63f1
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _fileAsset: {instanceID: 0}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 57909
+  packageName: Simple Variable Ground Substance
+  packageVersion: 1.1
+  assetPath: Assets/Tim's Substances/Simple Ground/Simple_Grass_Ground.sbsar
+  uploadId: 731118
