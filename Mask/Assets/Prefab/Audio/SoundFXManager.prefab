@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c70b28fe5849645b626113f5294379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundFXManager
-  footstepSourcePrefab: {fileID: 8794730957654222334, guid: 243e39da05d335d429f855d40584a5dd, type: 3}
+  audioSourcePrefab: {fileID: 8794730957654222334, guid: 243e39da05d335d429f855d40584a5dd, type: 3}

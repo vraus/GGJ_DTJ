@@ -4,7 +4,7 @@ public class SoundFXManager : MonoBehaviour
 {
     public static SoundFXManager instance { get; private set; }
 
-    [SerializeField] private AudioSource footstepSourcePrefab;
+    [SerializeField] private AudioSource audioSourcePrefab;
     public AudioSource FootstepSource { get; private set; }
 
     private void Awake()
@@ -20,9 +20,18 @@ public class SoundFXManager : MonoBehaviour
         }
     }
 
+    public void PlayAudioClip(AudioClip audioClip, Transform position, float volume)
+    {
+        AudioSource audioSource = Instantiate(audioSourcePrefab, position.position, Quaternion.identity);
+        audioSource.clip = audioClip;
+        audioSource.volume = volume;
+        audioSource.Play();
+        Destroy(audioSource.gameObject, audioClip.length);
+    }
+
     void CreateFootstepSource()
     {
-        FootstepSource = Instantiate(footstepSourcePrefab, transform);
+        FootstepSource = Instantiate(audioSourcePrefab, transform);
         FootstepSource.loop = false;
         FootstepSource.playOnAwake = false;
         FootstepSource.spatialBlend = 1f;

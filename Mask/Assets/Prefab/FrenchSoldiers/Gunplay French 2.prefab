@@ -685,7 +685,7 @@ MonoBehaviour:
   target: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
   Muzzle: {fileID: 1022588716158577557}
   destroyAfter: 2
-  shootSound: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 60e847e6fe4436648b4ce76678c2bfe1, type: 3}
 --- !u!1 &2871362013731736318
 GameObject:
   m_ObjectHideFlags: 0
