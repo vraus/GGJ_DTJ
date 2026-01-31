@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float bobSmoothing = 20f;
     [SerializeField] private Transform _camera = null;
     private Vector3 cameraStartPosition;
+    float previousBobY = 0f;
+    bool footstepPlayed = false;
+
 
     [Header("Stamina")]
     [SerializeField] Slider staminaSlider;
@@ -34,6 +37,9 @@ public class PlayerController : MonoBehaviour
     [Header("Collectibles")]
     [SerializeField] internal int MasksCollected = 0;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip[] walkFootstepClips;
+
     Vector3 playerVelocity;
     bool groundedPlayer;
     float xRotation = 0.0f;
@@ -44,6 +50,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+
         inputManager = InputManager.Instance;
         playerCamera = GetComponentInChildren<Camera>();
 
@@ -146,19 +153,33 @@ public class PlayerController : MonoBehaviour
         if (speed < 0.01f || !controller.isGrounded)
         {
             ResetCamera();
+            footstepPlayed = false;
             return;
         }
 
-        float bobY = Mathf.Sin(Time.time * (isSprinting ? bobFrequencyRunning : bobFrequencyWalking)) * bobAmplitude;
-        float bobX = Mathf.Cos(Time.time * (isSprinting ? bobFrequencyRunning : bobFrequencyWalking) / 2f) * bobAmplitude * 2f;
+        float frequency = isSprinting ? bobFrequencyRunning : bobFrequencyWalking;
+
+        float bobY = Mathf.Sin(Time.time * frequency) * bobAmplitude;
+        float bobX = Mathf.Cos(Time.time * frequency / 2f) * bobAmplitude * 2f;
+
+        if (previousBobY > bobY && bobY <= -bobAmplitude * 0.95f && !footstepPlayed)
+        {
+            PlayWalkingFootstepSound();
+            footstepPlayed = true;
+        }
+
+        if (bobY > 0f)
+        {
+            footstepPlayed = false;
+        }
+
+        previousBobY = bobY;
 
         Vector3 targetPos = cameraStartPosition + new Vector3(bobX, bobY, 0f);
-
-
         _camera.localPosition = Vector3.Lerp(_camera.localPosition, targetPos, Time.deltaTime * bobSmoothing);
     }
 
-    private void ResetCamera()
+    void ResetCamera()
     {
         if (_camera.localPosition == cameraStartPosition) return;
         _camera.localPosition = Vector3.Lerp(_camera.localPosition, cameraStartPosition, Time.deltaTime * bobSmoothing);
@@ -168,6 +189,14 @@ public class PlayerController : MonoBehaviour
     {
         MasksCollected++;
         Debug.Log("Mask collected. Total: " + MasksCollected);
+    }
+
+    public void PlayWalkingFootstepSound()
+    {
+        Debug.Log("Playing footstep sound");
+        AudioClip footstepClip = walkFootstepClips[Random.Range(0, walkFootstepClips.Length)];
+        float volume = 10f;
+        SoundFXManager.instance.PlaySoundFXClip(footstepClip, transform, volume);
     }
 
 }
