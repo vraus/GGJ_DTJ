@@ -2079,6 +2079,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7770834328009113823, guid: e5f943ef7c5602844884e449226c7020, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 08f1f6230c5fe674d824fd0b5e61d9e0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2149,6 +2153,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 468448204}
     m_Modifications:
+    - target: {fileID: 6350731997435602140, guid: d3e375078ac5cc5408d8ff5d4366f54b, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 08f1f6230c5fe674d824fd0b5e61d9e0, type: 2}
     - target: {fileID: 6841872906045354767, guid: d3e375078ac5cc5408d8ff5d4366f54b, type: 3}
       propertyPath: m_Name
       value: Gunplay French 3
@@ -2210,6 +2218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gunplay French 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6198148412392846199, guid: bbb660228474a9a4bb690dc635935971, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 08f1f6230c5fe674d824fd0b5e61d9e0, type: 2}
     - target: {fileID: 6412023750040644233, guid: bbb660228474a9a4bb690dc635935971, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.754021
