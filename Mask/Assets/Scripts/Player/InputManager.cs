@@ -53,4 +53,9 @@ public class InputManager : MonoBehaviour
         return _playerControls.Locomotion.Jump.triggered;
     }
 
+    public bool IsCollectPressed()
+    {
+        return _playerControls.Locomotion.Collect.triggered;
+    }
+
 }

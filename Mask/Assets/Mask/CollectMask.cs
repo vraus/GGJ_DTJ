@@ -24,6 +24,17 @@ public class CollectMask : MonoBehaviour
             infoText.SetActive(true);
 
             infoText.transform.LookAt(player);
+            // If player presses collect while info is shown, collect the mask
+            var inputMgr = InputManager.Instance;
+            if (inputMgr != null && inputMgr.IsCollectPressed())
+            {
+                var pc = player.GetComponent<PlayerController>();
+                if (pc != null)
+                {
+                    pc.AddMask();
+                }
+                Destroy(gameObject);
+            }
         }
         else
         {
