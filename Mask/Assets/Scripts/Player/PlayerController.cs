@@ -36,7 +36,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float deathTiltAngleZ = 20f;
     [SerializeField] float deathDuration = 1.2f;
     [SerializeField] float deathCameraDrop = 0.3f;
-
+    [SerializeField] float groundOffset = 0.08f; // hauteur de la tête au sol
+    [SerializeField] LayerMask groundLayer;
 
 
     [Header("Stamina")]
@@ -104,6 +105,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (controller == null || inputManager == null || isGamePaused || controller.enabled == false)
+            return;
 
         Vector3 move = MoveAndRotatePlayer();
         if (move.magnitude > 0.1f) Sprint();
@@ -285,7 +288,7 @@ public class PlayerController : MonoBehaviour
         Transform cam = _camera;
 
         Quaternion startRot = cam.localRotation;
-        Vector3 startPos = cam.localPosition;
+        Vector3 startPos = cam.position;
 
         Quaternion targetRot = Quaternion.Euler(
             deathTiltAngleX,
@@ -293,7 +296,17 @@ public class PlayerController : MonoBehaviour
             Random.Range(-deathTiltAngleZ, deathTiltAngleZ)
         );
 
-        Vector3 targetPos = startPos + Vector3.down * deathCameraDrop;
+        RaycastHit hit;
+        Vector3 targetWorldPos = startPos;
+
+        if (Physics.Raycast(startPos, Vector3.down, out hit, 5f, groundLayer))
+        {
+            targetWorldPos = hit.point + Vector3.up * groundOffset;
+        }
+        else
+        {
+            targetWorldPos = startPos + Vector3.down * deathCameraDrop;
+        }
 
         float elapsed = 0f;
 
@@ -302,15 +315,21 @@ public class PlayerController : MonoBehaviour
             float t = elapsed / deathDuration;
             t = Mathf.SmoothStep(0f, 1f, t);
 
-            cam.localRotation = Quaternion.Slerp(startRot, targetRot, t);
-            cam.localPosition = Vector3.Lerp(startPos, targetPos, t);
+            cam.rotation = Quaternion.Slerp(cam.rotation, targetRot, t);
+            cam.position = Vector3.Lerp(startPos, targetWorldPos, t);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        cam.localRotation = targetRot;
-        cam.localPosition = targetPos;
+        playerCamera.fieldOfView = Mathf.Lerp(
+            playerCamera.fieldOfView,
+            50f,
+            Time.deltaTime * 3f
+        );
+
+        cam.rotation = targetRot;
+        cam.position = targetWorldPos;
     }
 
 
