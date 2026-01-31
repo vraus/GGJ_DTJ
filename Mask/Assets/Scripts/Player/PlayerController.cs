@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [Header("Locomotion Variables")]
     [SerializeField] float playerWalkSpeed = 5.0f;
     [SerializeField] float playerSprintSpeed = 12.0f;
-    [SerializeField] float jumpHeight = 1.5f;
+    [SerializeField] float DashHeight = 1.5f;
     [SerializeField] float gravityValue = -9.81f;
     bool isSprinting = false;
 
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         }
 
         CameraBobbing(move);
-        Jump();
+        Dash();
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
@@ -166,11 +166,11 @@ public class PlayerController : MonoBehaviour
             staminaSlider.value = currentStamina;
     }
 
-    void Jump()
+    void Dash()
     {
-        if (inputManager.IsJumpPressed() && groundedPlayer)
+        if (inputManager.IsDashPressed() && groundedPlayer)
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravityValue);
+            // Dash logic
         }
     }
 
