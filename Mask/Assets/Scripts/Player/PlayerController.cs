@@ -59,6 +59,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip maskCollectClip;
     [SerializeField] float walkRate = 10f;
     [SerializeField] float runRate = 20f;
+
+    [Header("Ladder")]
+    [SerializeField] float ladderClimbSpeed = 3f;
+    bool isOnLadder = false;
+
     float sin;
     bool canPlayFootstep = true;
 
@@ -110,9 +115,30 @@ public class PlayerController : MonoBehaviour
             return;
 
         Vector3 move = MoveAndRotatePlayer();
-        if (move.magnitude > 0.1f) Sprint();
-        controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
 
+        // --- LADDERS ---
+        if (isOnLadder)
+        {
+            // On annule la gravité
+            playerVelocity.y = 0f;
+
+            // Si le joueur appuie vers l'avant
+            if (inputManager.GetPlayerMovement().y > 0.1f)
+            {
+                controller.Move(Vector3.up * ladderClimbSpeed * Time.deltaTime);
+            }
+        }
+        else
+        {
+            if (move.magnitude > 0.1f)
+                Sprint();
+
+            controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
+
+            // Gravité normale
+            playerVelocity.y += gravityValue * Time.deltaTime;
+            controller.Move(playerVelocity * Time.deltaTime);
+        }
         if (move.magnitude > 0)
         {
             HandleFootsteps();
@@ -332,6 +358,23 @@ public class PlayerController : MonoBehaviour
 
         cam.rotation = targetRot;
         cam.position = targetWorldPos;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            isOnLadder = true;
+            playerVelocity.y = 0f; // reset propre
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            isOnLadder = false;
+        }
     }
 
 
