@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float deathTiltAngleZ = 20f;
     [SerializeField] float deathDuration = 1.2f;
     [SerializeField] float deathCameraDrop = 0.3f;
-    [SerializeField] float groundOffset = 0.08f; // hauteur de la tête au sol
+    [SerializeField] float groundOffset = 0.08f;
     [SerializeField] LayerMask groundLayer;
 
 
@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioClip[] walkFootstepClips;
+    [SerializeField] private AudioClip maskCollectClip;
     [SerializeField] float walkRate = 10f;
     [SerializeField] float runRate = 20f;
     float sin;
@@ -230,12 +231,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    internal void AddMask()
+    internal void AddMask(Transform maskTransform)
     {
         Debug.Log("Mask collected. Total: " + MasksCollected);
         if (MasksCollected < MaxMasksCarriable)
         {
             MasksCollected++;
+            SoundFXManager.instance.PlayAudioClip(maskCollectClip, maskTransform, 1f);
         }
     }
 

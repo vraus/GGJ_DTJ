@@ -268,20 +268,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   playerWalkSpeed: 5
   playerSprintSpeed: 8
-  jumpHeight: 1.5
+  DashHeight: 1.5
   gravityValue: -9.81
   mouseSensitivity: 60
+  duration: 0.3
+  magnitude: 0.2
   bobAmplitude: 0.05
   bobFrequencyWalking: 15
   bobFrequencyRunning: 20
   bobSmoothing: 20
   _camera: {fileID: 3867294097512184497}
+  deathTiltAngleX: -90
+  deathTiltAngleZ: 20
+  deathDuration: 3
+  deathCameraDrop: 1
+  groundOffset: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
   staminaSlider: {fileID: 1606910929969220269}
   maxStamina: 100
   staminaDrainRate: 15
   staminaRegenRate: 10
   staminaRegenThreshold: 2
   MasksCollected: 0
+  TotalMasks: 10
+  MaxMasksCarriable: 3
   walkFootstepClips:
   - {fileID: 8300000, guid: 4e387503071518b4bbd5c7a39d33c0a4, type: 3}
   - {fileID: 8300000, guid: c3065d6fd17fc4d4aac7c5f6b790bc73, type: 3}
@@ -294,6 +306,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b96b2925157f19746945c699e85651c3, type: 3}
   - {fileID: 8300000, guid: e1f47fb1a67382643a26001d0aa3f48c, type: 3}
   - {fileID: 8300000, guid: 35382558f97b81445b9039705075f642, type: 3}
+  maskCollectClip: {fileID: 8300000, guid: 864f9e2c32c5f4a4daf2ccc15d242ec8, type: 3}
   walkRate: 10
   runRate: 20
 --- !u!114 &829270091293475605
