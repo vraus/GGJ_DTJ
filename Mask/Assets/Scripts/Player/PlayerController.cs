@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float groundOffset = 0.08f;
     [SerializeField] LayerMask groundLayer;
 
+    [Header("UI Elements")]
+    [SerializeField] GameObject menuPauseUI;
 
     [Header("Stamina")]
     [SerializeField] Slider staminaSlider;
@@ -85,23 +87,18 @@ public class PlayerController : MonoBehaviour
         currentStamina = maxStamina;
         staminaSlider.value = currentStamina;
 
-        inputManager.PlayerControls.Locomotion.Pause.performed += ctx =>
-        {
-            if (isGamePaused)
-            {
-                isGamePaused = false;
-                Time.timeScale = 1f;
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            else
-            {
-                isGamePaused = true;
-                Time.timeScale = 0f;
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
-        };
+
+        // inputManager.PlayerControls.Locomotion.Pause.performed += ctx =>
+        // {
+        //     if (isGamePaused)
+        //         isGamePaused = false;
+        //     else
+        //         isGamePaused = true;
+        // 
+        //     menuPauseUI.GetComponent<MenuPause>().TogglePauseMenu(isGamePaused);
+        // };
+
+        inputManager.PlayerControls.Locomotion.Pause.performed += ctx => TogglePause();
     }
 
     void Update()
@@ -334,5 +331,16 @@ public class PlayerController : MonoBehaviour
         cam.position = targetWorldPos;
     }
 
+    public void ResumeGame()
+    {
+        isGamePaused = false;
+        menuPauseUI.GetComponent<MenuPause>().TogglePauseMenu(isGamePaused);
+    }
+
+    private void TogglePause()
+    {
+        isGamePaused = !isGamePaused;
+        menuPauseUI.GetComponent<MenuPause>().TogglePauseMenu(isGamePaused);
+    }
 
 }
