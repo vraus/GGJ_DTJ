@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +38,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Collectibles")]
     [SerializeField] internal int MasksCollected = 0;
+    [SerializeField] internal int TotalMasks = 10;
+    [SerializeField] internal int MaxMasksCarriable = 3;
 
     [Header("Audio")]
     [SerializeField] private AudioClip[] walkFootstepClips;
@@ -218,8 +219,11 @@ public class PlayerController : MonoBehaviour
 
     internal void AddMask()
     {
-        MasksCollected++;
         Debug.Log("Mask collected. Total: " + MasksCollected);
+        if (MasksCollected < MaxMasksCarriable)
+        {
+            MasksCollected++;
+        }
     }
 
     public void PlayWalkingFootstepSound()

@@ -145,6 +145,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""953a38ac-b756-4823-978e-68fa9c67a5d0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -257,6 +266,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""InGameMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ddb50cf-1d0a-49b1-8eb1-f0fd97db8ed3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -283,6 +303,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Locomotion_Collect = m_Locomotion.FindAction("Collect", throwIfNotFound: true);
         m_Locomotion_Sprint = m_Locomotion.FindAction("Sprint", throwIfNotFound: true);
         m_Locomotion_InGameMenu = m_Locomotion.FindAction("InGameMenu", throwIfNotFound: true);
+        m_Locomotion_Drop = m_Locomotion.FindAction("Drop", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -369,6 +390,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Locomotion_Collect;
     private readonly InputAction m_Locomotion_Sprint;
     private readonly InputAction m_Locomotion_InGameMenu;
+    private readonly InputAction m_Locomotion_Drop;
     /// <summary>
     /// Provides access to input actions defined in input action map "Locomotion".
     /// </summary>
@@ -404,6 +426,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Locomotion/InGameMenu".
         /// </summary>
         public InputAction @InGameMenu => m_Wrapper.m_Locomotion_InGameMenu;
+        /// <summary>
+        /// Provides access to the underlying input action "Locomotion/Drop".
+        /// </summary>
+        public InputAction @Drop => m_Wrapper.m_Locomotion_Drop;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -448,6 +474,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @InGameMenu.started += instance.OnInGameMenu;
             @InGameMenu.performed += instance.OnInGameMenu;
             @InGameMenu.canceled += instance.OnInGameMenu;
+            @Drop.started += instance.OnDrop;
+            @Drop.performed += instance.OnDrop;
+            @Drop.canceled += instance.OnDrop;
         }
 
         /// <summary>
@@ -477,6 +506,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @InGameMenu.started -= instance.OnInGameMenu;
             @InGameMenu.performed -= instance.OnInGameMenu;
             @InGameMenu.canceled -= instance.OnInGameMenu;
+            @Drop.started -= instance.OnDrop;
+            @Drop.performed -= instance.OnDrop;
+            @Drop.canceled -= instance.OnDrop;
         }
 
         /// <summary>
@@ -572,5 +604,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInGameMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Drop" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDrop(InputAction.CallbackContext context);
     }
 }

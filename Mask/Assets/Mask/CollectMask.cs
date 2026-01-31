@@ -3,6 +3,8 @@ using UnityEngine;
 public class CollectMask : MonoBehaviour
 {
     public GameObject infoText;
+    public GameObject CantCarryText;
+    public GameObject Canvas;
     public float maxLookDistance = 3f;
 
     private Transform player;
@@ -10,6 +12,7 @@ public class CollectMask : MonoBehaviour
     void Start()
     {
         infoText.SetActive(false);
+        CantCarryText.SetActive(false);
     }
 
     void Update()
@@ -18,26 +21,41 @@ public class CollectMask : MonoBehaviour
             return;
 
         float distance = Vector3.Distance(player.position, transform.position);
+        Canvas.transform.LookAt(player);
+        Canvas.transform.Rotate(0, 180, 0);
 
         if (distance <= maxLookDistance)
         {
-            infoText.SetActive(true);
 
-            infoText.transform.LookAt(player);
+            if (player.GetComponent<PlayerController>().MasksCollected >= player.GetComponent<PlayerController>().MaxMasksCarriable)
+            {
+                CantCarryText.SetActive(true);
+                infoText.SetActive(false);
+                return;
+            }
+            else
+            {
+                infoText.SetActive(true);
+                CantCarryText.SetActive(false);
+            }
+
+
+
             // If player presses collect while info is shown, collect the mask
             var inputMgr = InputManager.Instance;
             if (inputMgr != null && inputMgr.IsCollectPressed())
             {
                 var pc = player.GetComponent<PlayerController>();
-                if (pc != null)
+                if (pc != null && pc.MasksCollected < pc.MaxMasksCarriable)
                 {
                     pc.AddMask();
+                    Destroy(gameObject);
                 }
-                Destroy(gameObject);
             }
         }
         else
         {
+            CantCarryText.SetActive(false);
             infoText.SetActive(false);
         }
     }
