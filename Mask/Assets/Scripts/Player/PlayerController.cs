@@ -92,9 +92,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Sprint();
 
         Vector3 move = MoveAndRotatePlayer();
+        if (move.magnitude > 0.1f) Sprint();
         controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
 
         if (move.magnitude > 0)
@@ -141,7 +141,6 @@ public class PlayerController : MonoBehaviour
 
     void Sprint()
     {
-
         if (inputManager.IsSprintPressed() && currentStamina > 0)
         {
             isSprinting = true;
@@ -205,10 +204,9 @@ public class PlayerController : MonoBehaviour
     void HandleFootsteps()
     {
         sin = Mathf.Sin(Time.time * (isSprinting ? runRate : walkRate));
-        if (sin > 0.97f && canPlayFootstep)
+        if (sin > 0.97f && canPlayFootstep && controller.isGrounded)
         {
             canPlayFootstep = false;
-            Debug.Log("Play Footstep");
             PlayWalkingFootstepSound();
         }
         else if (sin < 0f && !canPlayFootstep)
