@@ -58,7 +58,7 @@ public class CinematicManager : MonoBehaviour
         foreach (AudioObject clip in radioScriptAudioClips)
         {
             StartCoroutine(PlayAudioWithSubtitles(clip));
-            yield return new WaitForSeconds(clip.audioClip.length + 0.5f);
+            yield return new WaitForSeconds(clip.audioClip.length);
         }
     }
 
