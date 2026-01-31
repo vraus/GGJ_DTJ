@@ -5,6 +5,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+
+    [Header("Game Controls")]
+    bool isGamePaused = false;
+
     [Header("Locomotion Variables")]
     [SerializeField] float playerWalkSpeed = 5.0f;
     [SerializeField] float playerSprintSpeed = 12.0f;
@@ -65,6 +69,24 @@ public class PlayerController : MonoBehaviour
 
         currentStamina = maxStamina;
         staminaSlider.value = currentStamina;
+
+        inputManager.PlayerControls.Locomotion.InGameMenu.performed += ctx =>
+        {
+            if (isGamePaused)
+            {
+                isGamePaused = false;
+                Time.timeScale = 1f;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                isGamePaused = true;
+                Time.timeScale = 0f;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+        };
     }
 
     void Update()

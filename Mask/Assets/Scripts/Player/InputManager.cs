@@ -14,6 +14,8 @@ public class InputManager : MonoBehaviour
 
     private PlayerInputActions _playerControls;
 
+    public PlayerInputActions PlayerControls => _playerControls;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
