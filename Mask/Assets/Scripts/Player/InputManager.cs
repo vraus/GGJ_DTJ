@@ -67,7 +67,6 @@ public class InputManager : MonoBehaviour
 
     public bool IsDroppedPressed()
     {
-        Debug.Log("Drop Pressed: " + _playerControls.Locomotion.Drop.triggered);
         return _playerControls.Locomotion.Drop.triggered;
     }
 
