@@ -1,11 +1,11 @@
 using UnityEngine;
-using TMPro;
 
 public class CollectMask : MonoBehaviour
 {
     public GameObject infoText;
     public float maxLookDistance = 3f;
-    bool playerNearby = false;
+
+    private Transform player;
 
     void Start()
     {
@@ -14,19 +14,28 @@ public class CollectMask : MonoBehaviour
 
     void Update()
     {
-        if (!playerNearby) return;
+        if (player == null)
+            return;
 
-        if (!playerNearby && infoText.activeSelf)
+        float distance = Vector3.Distance(player.position, transform.position);
+
+        if (distance <= maxLookDistance)
+        {
+            infoText.SetActive(true);
+
+            infoText.transform.LookAt(player);
+        }
+        else
+        {
             infoText.SetActive(false);
-
-        infoText.SetActive(true);
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            playerNearby = true;
+            player = other.transform;
         }
     }
 
@@ -34,7 +43,7 @@ public class CollectMask : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerNearby = false;
+            player = null;
             infoText.SetActive(false);
         }
     }
