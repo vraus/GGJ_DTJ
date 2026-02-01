@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject settingsUI;
     [SerializeField] GameObject creditsUI;
     [SerializeField] GameObject warningUI;
+    [SerializeField] GameObject pressAnyKeyUI;
     bool start;
 
     void Start()
@@ -16,6 +17,7 @@ public class MainMenu : MonoBehaviour
         mainMenuUI.SetActive(false);
         creditsUI.SetActive(false);
         warningUI.SetActive(false);
+        pressAnyKeyUI.SetActive(true);
     }
 
     void Update()
@@ -50,6 +52,7 @@ public class MainMenu : MonoBehaviour
         settingsUI.SetActive(false);
         creditsUI.SetActive(false);
         warningUI.SetActive(false);
+        pressAnyKeyUI.SetActive(false);
     }
 
     public void Credits()
@@ -58,6 +61,7 @@ public class MainMenu : MonoBehaviour
         mainMenuUI.SetActive(false);
         settingsUI.SetActive(false);
         warningUI.SetActive(false);
+        pressAnyKeyUI.SetActive(false);
     }
 
     public void Warning()
@@ -66,6 +70,7 @@ public class MainMenu : MonoBehaviour
         mainMenuUI.SetActive(false);
         settingsUI.SetActive(false);
         creditsUI.SetActive(false);
+        pressAnyKeyUI.SetActive(false);
     }
 
     public void Quit()

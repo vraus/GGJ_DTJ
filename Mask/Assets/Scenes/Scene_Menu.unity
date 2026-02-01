@@ -1347,16 +1347,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This game prototype depicts scenes of war and violence that may be distressing
-    or disturbing to some players.
+  m_text: '
+
+    This game prototype depicts scenes of war and violence that may
+    be distressing or disturbing to some players.
 
 
-    It also contains flashing lights, camera
-    effects, and visual sequences that may cause discomfort or trigger seizures for
-    people with photosensitive epilepsy.
+    It also contains flashing
+    lights, camera effects, and visual sequences that may cause discomfort or trigger
+    seizures for people with photosensitive epilepsy.
 
 
-    Player discretion is advised.'
+    Player discretion is
+    advised.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1961,7 +1964,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &811758760
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1976,10 +1979,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 225815002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 95.995, y: -170.195}
+  m_SizeDelta: {x: 113.9, y: 75.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &811758761
 MonoBehaviour:
@@ -2429,6 +2432,7 @@ GameObject:
   - component: {fileID: 1100601437}
   - component: {fileID: 1100601439}
   - component: {fileID: 1100601438}
+  - component: {fileID: 1100601440}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2452,8 +2456,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 154.845, y: -134.3075}
-  m_SizeDelta: {x: 309.69, y: 268.615}
+  m_AnchoredPosition: {x: 126.725006, y: -199.295}
+  m_SizeDelta: {x: 253.45001, y: 340.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1100601438
 MonoBehaviour:
@@ -2547,7 +2551,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 102.77669, z: 1.8575134, w: -39.175453}
+  m_margin: {x: 0, y: 102.77669, z: 1.8575134, w: 96.88018}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2561,6 +2565,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100601436}
   m_CullTransparentMesh: 1
+--- !u!114 &1100601440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100601436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &1163650747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2867,11 +2885,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8667865866043716397, guid: fcb5afcca0b1c4f4d8b2f820f7f32666, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 309.69
+      value: 253.45001
       objectReference: {fileID: 0}
     - target: {fileID: 8667865866043716397, guid: fcb5afcca0b1c4f4d8b2f820f7f32666, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 65.235
+      value: 57.70999
       objectReference: {fileID: 0}
     - target: {fileID: 8667865866043716397, guid: fcb5afcca0b1c4f4d8b2f820f7f32666, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2903,11 +2921,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8667865866043716397, guid: fcb5afcca0b1c4f4d8b2f820f7f32666, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 154.845
+      value: 126.725006
       objectReference: {fileID: 0}
     - target: {fileID: 8667865866043716397, guid: fcb5afcca0b1c4f4d8b2f820f7f32666, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -301.23248
+      value: -427.445
       objectReference: {fileID: 0}
     - target: {fileID: 8667865866043716397, guid: fcb5afcca0b1c4f4d8b2f820f7f32666, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3919,8 +3937,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 154.845, y: -299.175}
-  m_SizeDelta: {x: 309.69, y: 333.85}
+  m_AnchoredPosition: {x: 126.725006, y: -360.4}
+  m_SizeDelta: {x: 253.45001, y: 456.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1680299769
 GameObject:
@@ -4669,6 +4687,7 @@ MonoBehaviour:
   settingsUI: {fileID: 699108139}
   creditsUI: {fileID: 1675793877}
   warningUI: {fileID: 1689865787}
+  pressAnyKeyUI: {fileID: 811758759}
 --- !u!1 &1963583018
 GameObject:
   m_ObjectHideFlags: 0

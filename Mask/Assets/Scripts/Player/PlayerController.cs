@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
     InputManager inputManager;
     Camera playerCamera;
     CharacterController controller;
+    System.Action<UnityEngine.InputSystem.InputAction.CallbackContext> pauseCallback;
 
     void Start()
     {
@@ -116,7 +117,11 @@ public class PlayerController : MonoBehaviour
         currentStamina = maxStamina;
         staminaSlider.value = currentStamina;
 
-        inputManager.PlayerControls.Locomotion.Pause.performed += ctx => TogglePause();
+        pauseCallback = ctx => TogglePause();
+        if (inputManager != null && inputManager.PlayerControls != null)
+        {
+            inputManager.PlayerControls.Locomotion.Pause.performed += pauseCallback;
+        }
     }
 
     void Update()
@@ -480,16 +485,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        if (inputManager != null && inputManager.PlayerControls != null && pauseCallback != null)
+        {
+            inputManager.PlayerControls.Locomotion.Pause.performed -= pauseCallback;
+        }
+    }
+
     public void ResumeGame()
     {
         isGamePaused = false;
-        menuPauseUI.GetComponent<MenuPause>().TogglePauseMenu(isGamePaused);
+        menuPauseUI.GetComponentInParent<MenuPause>().TogglePauseMenu(isGamePaused);
     }
 
     private void TogglePause()
     {
+        if (menuPauseUI == null)
+            return;
+
         isGamePaused = !isGamePaused;
-        menuPauseUI.GetComponent<MenuPause>().TogglePauseMenu(isGamePaused);
+        MenuPause pauseMenu = menuPauseUI.GetComponentInParent<MenuPause>();
+        if (pauseMenu != null)
+            pauseMenu.TogglePauseMenu(isGamePaused);
     }
 
 
