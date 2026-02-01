@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject menuPauseUI;
 
     [Header("Gaz")]
-    [SerializeField] float gazStaminaDrainRate = 3f;
+    [SerializeField] float gazStaminaDrainRate = 1f;
     [SerializeField] float gazTimerBeforeDeath = 5f;
     float gazDeathTimer = 0f;
     bool isInGazArea = false;
@@ -381,6 +381,10 @@ public class PlayerController : MonoBehaviour
     public void UpdateMaskMissionProgress()
     {
         CurrentTotalCollectedMasks++;
+        if (CurrentTotalCollectedMasks >= TotalMasks)
+        {
+            Timer.Instance.StopTimer();
+        }
     }
 
     public bool GetCurretnTotalCollectedMasksWinCondition()

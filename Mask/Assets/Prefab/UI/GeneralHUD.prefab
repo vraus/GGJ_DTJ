@@ -458,7 +458,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 394, y: -50.003334}
+  m_AnchoredPosition: {x: 236.79999, y: -29.745003}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2558778648257465112
@@ -931,7 +931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 394, y: -50.003334}
+  m_AnchoredPosition: {x: 236.79999, y: -29.745003}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3789028488033433372
@@ -1424,10 +1424,13 @@ MonoBehaviour:
   playerController: {fileID: 0}
   stamina: {fileID: 680394169152258161}
   LoseMenu: {fileID: 2868916128758028434}
-  MasterVolumeSlider: {fileID: 0}
-  MusicVolumeSlider: {fileID: 0}
-  SFXVolumeSlider: {fileID: 0}
+  WinMenu: {fileID: 0}
+  MasterVolumeSlider: {fileID: 5954368273828131418}
+  MusicVolumeSlider: {fileID: 4724623817253985676}
+  SFXVolumeSlider: {fileID: 4321370243753069112}
   soundMixerManager: {fileID: 0}
+  loseAudioClip: {fileID: 8300000, guid: eb7702c299df6334b814a9f4d9401833, type: 3}
+  winAudioClip: {fileID: 8300000, guid: a4c3cd0b2948c8c4db3fa7279b58e0d0, type: 3}
 --- !u!1 &4619191164677361588
 GameObject:
   m_ObjectHideFlags: 0
@@ -1612,9 +1615,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3264889439530589253}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 0
+  m_MaxValue: -10
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1803,7 +1806,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 394, y: -50.003334}
+  m_AnchoredPosition: {x: 236.79999, y: -29.745003}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &804283353007367007
@@ -2367,7 +2370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 394, y: -50.003334}
+  m_AnchoredPosition: {x: 236.79999, y: -29.745003}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4324484774662288656
@@ -2938,10 +2941,13 @@ MonoBehaviour:
   playerController: {fileID: 0}
   stamina: {fileID: 0}
   LoseMenu: {fileID: 0}
+  WinMenu: {fileID: 0}
   MasterVolumeSlider: {fileID: 0}
   MusicVolumeSlider: {fileID: 0}
   SFXVolumeSlider: {fileID: 0}
   soundMixerManager: {fileID: 0}
+  loseAudioClip: {fileID: 0}
+  winAudioClip: {fileID: 0}
 --- !u!114 &9091077269209976124
 MonoBehaviour:
   m_ObjectHideFlags: 0

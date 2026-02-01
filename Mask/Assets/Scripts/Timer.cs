@@ -47,6 +47,14 @@ public class Timer : MonoBehaviour
         StartCoroutine(Countdown());
     }
 
+    public void StopTimer()
+    {
+        timerText.gameObject.SetActive(false);
+        StopAllCoroutines();
+        timeRemaining = 0;
+        GetComponentInParent<MenuPause>().TimerStopped();
+    }
+
     IEnumerator Countdown()
     {
         while (timeRemaining > 0 && isActive)
