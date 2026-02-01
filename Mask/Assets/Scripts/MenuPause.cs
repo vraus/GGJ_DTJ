@@ -11,10 +11,17 @@ public class MenuPause : MonoBehaviour
     [SerializeField] private GameObject stamina;
     [SerializeField] private GameObject LoseMenu;
     [SerializeField] private GameObject WinMenu;
+
+    [Header("Audio")]
     [SerializeField] private Slider MasterVolumeSlider;
     [SerializeField] private Slider MusicVolumeSlider;
     [SerializeField] private Slider SFXVolumeSlider;
     [SerializeField] private SoundMixerManager soundMixerManager;
+
+    [Header("Audio Clip")]
+    [SerializeField] private AudioSource audioSourceObject;
+    [SerializeField] private AudioClip loseAudioClip;
+    [SerializeField] private AudioClip winAudioClip;
 
     void Start()
     {
@@ -62,18 +69,27 @@ public class MenuPause : MonoBehaviour
 
     public void DisplayLoseMenu()
     {
-        Time.timeScale = 0f;
         LoseMenu.SetActive(true);
+        MusicManager.instance.StopMusic();
+        PlayEndgameSound(loseAudioClip);
+        Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
     public void DisplayWinMenu()
     {
-        Time.timeScale = 0f;
         WinMenu.SetActive(true);
+        MusicManager.instance.StopMusic();
+        PlayEndgameSound(winAudioClip);
+        Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void PlayEndgameSound(AudioClip audioClip)
+    {
+        SoundFXManager.instance.PlayAudioClip(audioClip, playerController.transform, 1f);
     }
 
     public void PlayAgain()
