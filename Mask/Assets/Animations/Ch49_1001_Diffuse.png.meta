@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: 8db69daeeed40dc44ba42402defaad95
-AssetOrigin:
-  serializedVersion: 1
-  productId: 182527
-  packageName: Wooden Canopy
-  packageVersion: 1.0
-  assetPath: Assets/Plugins/Wooden_Canopy/maps/Drova_Albedo.tga
-  uploadId: 399513
+guid: ea562cf27824cf847bc10bd826fbc552
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +65,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50331648
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
