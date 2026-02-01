@@ -123,8 +123,6 @@ public class PlayerController : MonoBehaviour
         currentStamina = maxStamina;
         staminaSlider.value = currentStamina;
 
-        MaskGoal.Instance.SetMaximumMasks(TotalMasks);
-
         pauseCallback = ctx => TogglePause();
         if (inputManager != null && inputManager.PlayerControls != null)
         {
