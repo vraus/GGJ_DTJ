@@ -53,6 +53,8 @@ public class CinematicManager : MonoBehaviour
     {
         yield return new WaitForSeconds(6f); // Simulated cinematic duration
         subtitles.SetActive(true);
+        Say();
+        yield return new WaitForSeconds(19f);
         CameraCinematic.SetActive(false);
         CameraPlayer.SetActive(true);
 
@@ -61,7 +63,6 @@ public class CinematicManager : MonoBehaviour
         if (characterController != null)
             characterController.enabled = true;
 
-        Say();
     }
 
     public void SetSubtitle(string text)
