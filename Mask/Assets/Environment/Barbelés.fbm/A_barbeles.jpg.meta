@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: e97a51fae99224940965bfe624c1d922
-AssetOrigin:
-  serializedVersion: 1
-  productId: 74843
-  packageName: World War 1 Pack
-  packageVersion: 1.0
-  assetPath: Assets/World War 1 Pack/Textures/Destroyed_House_V1_Albedo.png
-  uploadId: 143969
+guid: 47755022cf1e4644082e12a7e9efb101
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -37,7 +30,7 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
@@ -70,9 +63,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
-  swizzle: 50397441
-  cookieLightType: 1
+  applyGammaDecoding: 0
+  swizzle: 0
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
