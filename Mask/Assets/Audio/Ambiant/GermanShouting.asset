@@ -1,0 +1,258 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-8264120253020756491
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines1_{-8264120253020756491}
+  m_AudioClip: {fileID: 8300000, guid: 098c89713cf7a2b4ea986bc4713a5d23, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-7228342618400066453
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines5_{-7228342618400066453}
+  m_AudioClip: {fileID: 8300000, guid: 2104cc5fd14b8104f9c9660b093ed7a3, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-6040738531267533882
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines10_{-6040738531267533882}
+  m_AudioClip: {fileID: 8300000, guid: db398d4d95d5b424999abcd5a6b6d3ca, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-6001688170821881614
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines11_{-6001688170821881614}
+  m_AudioClip: {fileID: 8300000, guid: 2091214939f9b264a9e3235b1dd6765f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5245698653893616771
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines4_{-5245698653893616771}
+  m_AudioClip: {fileID: 8300000, guid: 31a49a3f657936d429766340a5968902, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-4747442114371679321
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines12_{-4747442114371679321}
+  m_AudioClip: {fileID: 8300000, guid: 9b4b4ba3fbf8e574d8873f59579878a6, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-3911710190188136331
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines8_{-3911710190188136331}
+  m_AudioClip: {fileID: 8300000, guid: 50fc5e29a90197d42ae9f813e223016f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2583189703945397388
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines20_{-2583189703945397388}
+  m_AudioClip: {fileID: 8300000, guid: 509e87c7a9956904387061459448a57b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2415150726535069981
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines16_{-2415150726535069981}
+  m_AudioClip: {fileID: 8300000, guid: 767ba87de21dc56419a7aff4676f127c, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1404257590233580171
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines2_{-1404257590233580171}
+  m_AudioClip: {fileID: 8300000, guid: 9ac64894f75944a4cb4bb4ef1bad2286, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-877620278277696346
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines3_{-877620278277696346}
+  m_AudioClip: {fileID: 8300000, guid: 0d797a03afccf3f44a49d49ab81e79da, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &149592895262071103
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines13_{149592895262071103}
+  m_AudioClip: {fileID: 8300000, guid: 1653701efc4357a42bebeabe345c9bbb, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &284610365198774212
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines7_{284610365198774212}
+  m_AudioClip: {fileID: 8300000, guid: 24520b9ca4d0ec94bb7b7b99533310b9, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &2390801863514295834
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines15_{2390801863514295834}
+  m_AudioClip: {fileID: 8300000, guid: e4d94e2bceb828645b0a8a18eaf61e18, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GermanShouting
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 1
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: -150, y: 150}
+  m_AutomaticTriggerTimeRandomizationRange: {x: -1, y: 5}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 7733100898562687932}
+  - {fileID: -8264120253020756491}
+  - {fileID: -1404257590233580171}
+  - {fileID: -877620278277696346}
+  - {fileID: -5245698653893616771}
+  - {fileID: -7228342618400066453}
+  - {fileID: 8323364706245391165}
+  - {fileID: 284610365198774212}
+  - {fileID: -3911710190188136331}
+  - {fileID: 6663256600392702835}
+  - {fileID: -6040738531267533882}
+  - {fileID: -6001688170821881614}
+  - {fileID: -4747442114371679321}
+  - {fileID: 149592895262071103}
+  - {fileID: 6500790020268738587}
+  - {fileID: 2390801863514295834}
+  - {fileID: -2415150726535069981}
+  - {fileID: 7740618170367432665}
+  - {fileID: 8013138065215041952}
+  - {fileID: 7123348439105617679}
+  - {fileID: -2583189703945397388}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 0
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 1
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &6500790020268738587
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines14_{6500790020268738587}
+  m_AudioClip: {fileID: 8300000, guid: 27d7ee056a6883f49941aa0ef485756f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &6663256600392702835
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines9_{6663256600392702835}
+  m_AudioClip: {fileID: 8300000, guid: e88d5d9473854a34ab7e6758f57ca2bc, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &7123348439105617679
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines19_{7123348439105617679}
+  m_AudioClip: {fileID: 8300000, guid: 8fde224adec77a84296ee08faf56bafc, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &7733100898562687932
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines_{7733100898562687932}
+  m_AudioClip: {fileID: 8300000, guid: c6f14f00d9a074743bd461e0753a7dd7, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &7740618170367432665
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines17_{7740618170367432665}
+  m_AudioClip: {fileID: 8300000, guid: f879dd54004cd0446abe6982b1367463, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &8013138065215041952
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines18_{8013138065215041952}
+  m_AudioClip: {fileID: 8300000, guid: 0e3a25c5d9aefd04aa70600f65dbd01e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &8323364706245391165
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DoDS All German Voice Lines6_{8323364706245391165}
+  m_AudioClip: {fileID: 8300000, guid: 74697c6e3ff41a84baa482dbbb73482e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
