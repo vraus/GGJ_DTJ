@@ -84,7 +84,9 @@ MonoBehaviour:
   CameraCinematic: {fileID: 5541507903881611531}
   Stamina: {fileID: 0}
   playerController: {fileID: 0}
-  timelineAssetEnd: {fileID: 11400000, guid: 11acac5d3151f534f8a0ac5c78d15d1b, type: 2}
+  timelineAssetStart: {fileID: 11400000, guid: 11acac5d3151f534f8a0ac5c78d15d1b, type: 2}
+  timelineAssetEnd: {fileID: 11400000, guid: 0a2a269f8751aff429ce4a47094e3a54, type: 2}
+  Fog: {fileID: 1402046603686860749}
   subtitles: {fileID: 0}
   subtitleText: {fileID: 0}
   radioScriptAudioClips:
@@ -244,7 +246,7 @@ PlayableDirector:
   m_GameObject: {fileID: 5541507903881611531}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 0a2a269f8751aff429ce4a47094e3a54, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 11acac5d3151f534f8a0ac5c78d15d1b, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
