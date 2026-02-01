@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MortierManager : MonoBehaviour
 {
-    [SerializeField] GameObject MortierPlace;
     [SerializeField] GameObject MortierShadow;
     [SerializeField] GameObject MortierExplosion;
     [SerializeField] GameObject Player;
@@ -43,7 +42,17 @@ public class MortierManager : MonoBehaviour
         Vector3 playerPos = Player.transform.position;
         float radius = 5f;
         Vector2 randomCircle = Random.insideUnitCircle * radius;
-        Vector3 spawnPos = new Vector3(playerPos.x + randomCircle.x, MortierPlace.transform.position.y + 0.2f, playerPos.z + randomCircle.y);
+        Vector3 spawnBasePos = new Vector3(playerPos.x + randomCircle.x, playerPos.y + 100f, playerPos.z + randomCircle.y);
+
+        // Raycast down to find terrain height
+        float spawnHeight = playerPos.y;
+        RaycastHit hit;
+        if (Physics.Raycast(spawnBasePos, Vector3.down, out hit, 200f))
+        {
+            spawnHeight = hit.point.y + 0.2f;
+        }
+
+        Vector3 spawnPos = new Vector3(spawnBasePos.x, spawnHeight, spawnBasePos.z);
 
         MortierShadow.transform.position = spawnPos;
         MortierShadow.transform.localScale = Vector3.one * 0.5f;
