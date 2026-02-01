@@ -381,6 +381,10 @@ public class PlayerController : MonoBehaviour
     public void UpdateMaskMissionProgress()
     {
         CurrentTotalCollectedMasks++;
+        if (CurrentTotalCollectedMasks >= TotalMasks)
+        {
+            Timer.Instance.StopTimer();
+        }
     }
 
     public bool GetCurretnTotalCollectedMasksWinCondition()
