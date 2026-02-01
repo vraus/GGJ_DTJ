@@ -19,7 +19,6 @@ public class MenuPause : MonoBehaviour
     [SerializeField] private SoundMixerManager soundMixerManager;
 
     [Header("Audio Clip")]
-    [SerializeField] private AudioSource audioSourceObject;
     [SerializeField] private AudioClip loseAudioClip;
     [SerializeField] private AudioClip winAudioClip;
 
