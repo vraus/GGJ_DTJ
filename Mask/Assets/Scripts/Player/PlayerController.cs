@@ -142,8 +142,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!isDashing)
             {
-                if (move.magnitude > 0.1f)
-                    Sprint();
+                Sprint();
 
                 controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
 
@@ -196,7 +195,8 @@ public class PlayerController : MonoBehaviour
 
     void Sprint()
     {
-        if (inputManager.IsSprintPressed() && currentStamina > 0)
+
+        if (inputManager.IsSprintPressed() && currentStamina > 0 && inputManager.GetPlayerMovement().magnitude > 0.1f)
         {
             isSprinting = true;
             currentStamina -= staminaDrainRate * Time.deltaTime;
@@ -207,7 +207,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             isSprinting = false;
-            if (!inputManager.IsSprintPressed() && currentStamina < maxStamina)
+            if (currentStamina < maxStamina)
             {
                 staminaRegenTimer += Time.deltaTime;
                 if (staminaRegenTimer >= staminaRegenThreshold)
