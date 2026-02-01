@@ -75,4 +75,8 @@ public class InputManager : MonoBehaviour
         _playerControls.Disable();
     }
 
+    public void EnableAllInputs()
+    {
+        _playerControls.Enable();
+    }
 }

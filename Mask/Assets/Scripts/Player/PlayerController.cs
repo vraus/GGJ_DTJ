@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float staminaRegenRate = 15f;
     [SerializeField] float staminaRegenThreshold = 2f;
     Color staminaFullColor;
-    Color staminaEmptyColor = Color.red;
+    Color staminaEmptyColor = Color.white;
     float staminaRegenTimer = 0f;
     float currentStamina;
 
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     System.Action<UnityEngine.InputSystem.InputAction.CallbackContext> pauseCallback;
 
-    void Start()
+    public void StartPlay()
     {
         staminaFullColor = staminaSlider.fillRect.GetComponent<Image>().color;
         controller = gameObject.GetComponent<CharacterController>();
@@ -133,6 +133,9 @@ public class PlayerController : MonoBehaviour
             dashCooldownTimer -= Time.deltaTime;
 
         CheckGazArea();
+
+        if (playerCamera == null)
+            return;
 
         Vector3 move = MoveAndRotatePlayer();
 
@@ -189,9 +192,6 @@ public class PlayerController : MonoBehaviour
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-
-        if (playerCamera == null)
-            return Vector3.zero;
 
         playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
@@ -499,8 +499,13 @@ public class PlayerController : MonoBehaviour
 
     public void ResumeGame()
     {
+        if (menuPauseUI == null)
+            return;
+
         isGamePaused = false;
-        menuPauseUI.GetComponentInParent<MenuPause>().TogglePauseMenu(isGamePaused);
+        MenuPause pauseMenu = menuPauseUI.GetComponentInParent<MenuPause>();
+        if (pauseMenu != null)
+            pauseMenu.TogglePauseMenu(isGamePaused);
     }
 
     private void TogglePause()
