@@ -99,6 +99,7 @@ public class CinematicManager : MonoBehaviour
             inputManager.EnableAllInputs();
         }
 
+        Timer.Instance.StartTimer();
         MusicManager.instance.PlayMusic();
         playerController.StartPlay();
         gameObject.SetActive(false);
