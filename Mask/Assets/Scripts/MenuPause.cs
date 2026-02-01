@@ -10,10 +10,18 @@ public class MenuPause : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject stamina;
     [SerializeField] private GameObject LoseMenu;
+    [SerializeField] private GameObject WinMenu;
+
+    [Header("Audio")]
     [SerializeField] private Slider MasterVolumeSlider;
     [SerializeField] private Slider MusicVolumeSlider;
     [SerializeField] private Slider SFXVolumeSlider;
     [SerializeField] private SoundMixerManager soundMixerManager;
+
+    [Header("Audio Clip")]
+    [SerializeField] private AudioSource audioSourceObject;
+    [SerializeField] private AudioClip loseAudioClip;
+    [SerializeField] private AudioClip winAudioClip;
 
     void Start()
     {
@@ -51,12 +59,37 @@ public class MenuPause : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Scene_Menu");
     }
 
+    public void TimerStopped()
+    {
+        if (playerController.GetCurretnTotalCollectedMasksWinCondition())
+            DisplayWinMenu();
+        else
+            playerController.PlayerDeath();
+    }
+
     public void DisplayLoseMenu()
     {
-        Time.timeScale = 0f;
         LoseMenu.SetActive(true);
+        MusicManager.instance.StopMusic();
+        PlayEndgameSound(loseAudioClip);
+        Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void DisplayWinMenu()
+    {
+        WinMenu.SetActive(true);
+        MusicManager.instance.StopMusic();
+        PlayEndgameSound(winAudioClip);
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void PlayEndgameSound(AudioClip audioClip)
+    {
+        SoundFXManager.instance.PlayAudioClip(audioClip, playerController.transform, 1f);
     }
 
     public void PlayAgain()

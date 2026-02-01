@@ -67,6 +67,7 @@ public class DeposeMasks : MonoBehaviour
                     {
                         mask.SetActive(true);
                         pc.MasksCollected--;
+                        pc.UpdateMaskMissionProgress();
                         lastDepositTime = Time.time;
                     }
                 }
