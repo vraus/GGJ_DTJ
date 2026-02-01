@@ -149,11 +149,11 @@ AudioRandomContainer:
   m_Name: GermanShouting
   m_Volume: 0
   m_Pitch: 0
-  m_AutomaticTriggerTime: 1
+  m_AutomaticTriggerTime: 6
   m_LoopCount: 1
   m_VolumeRandomizationRange: {x: 0, y: 0}
   m_PitchRandomizationRange: {x: -150, y: 150}
-  m_AutomaticTriggerTimeRandomizationRange: {x: -1, y: 5}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 3}
   m_LoopCountRandomizationRange: {x: 0, y: 0}
   m_Elements:
   - {fileID: 7733100898562687932}
@@ -177,7 +177,7 @@ AudioRandomContainer:
   - {fileID: 8013138065215041952}
   - {fileID: 7123348439105617679}
   - {fileID: -2583189703945397388}
-  m_AvoidRepeatingLast: 0
+  m_AvoidRepeatingLast: 3
   m_PlaybackMode: 2
   m_TriggerMode: 1
   m_AutomaticTriggerMode: 1
