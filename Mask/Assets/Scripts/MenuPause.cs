@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +24,9 @@ public class MenuPause : MonoBehaviour
     [SerializeField] private AudioClip loseAudioClip;
     [SerializeField] private AudioClip winAudioClip;
 
+    List<GameObject> FrenchSoldiers = new List<GameObject>();
+    [SerializeField] CinematicManager cinematicManager;
+
     void Start()
     {
         if (pauseMenuUI != null)
@@ -29,6 +34,9 @@ public class MenuPause : MonoBehaviour
             pauseMenuUI.SetActive(false);
             LoseMenu.SetActive(false);
         }
+
+        //get all gameobjects with tag FrenchSoldier
+        FrenchSoldiers.AddRange(GameObject.FindGameObjectsWithTag("French"));
 
         if (soundMixerManager != null)
         {
@@ -70,6 +78,16 @@ public class MenuPause : MonoBehaviour
     {
         LoseMenu.SetActive(true);
         MusicManager.instance.StopMusic();
+
+        foreach (GameObject soldier in FrenchSoldiers)
+        {
+            soldier.SetActive(false);
+        }
+        playerController.GetComponentInChildren<Camera>().gameObject.SetActive(false);
+        cinematicManager.gameObject.SetActive(true);
+        cinematicManager.CameraCinematic.SetActive(true);
+        cinematicManager.PlayEnd();
+
         PlayEndgameSound(loseAudioClip);
         Time.timeScale = 0f;
         Cursor.visible = true;
@@ -78,6 +96,17 @@ public class MenuPause : MonoBehaviour
 
     public void DisplayWinMenu()
     {
+        foreach (GameObject soldier in FrenchSoldiers)
+        {
+            soldier.GetComponent<ShootFrench>().WearMask();
+        }
+
+        //get cinematic manager and play end cinematic
+        playerController.GetComponentInChildren<Camera>().gameObject.SetActive(false);
+        cinematicManager.gameObject.SetActive(true);
+        cinematicManager.CameraCinematic.SetActive(true);
+        cinematicManager.PlayEnd();
+
         WinMenu.SetActive(true);
         MusicManager.instance.StopMusic();
         PlayEndgameSound(winAudioClip);

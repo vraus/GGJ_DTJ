@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class ShootFrench : MonoBehaviour
@@ -6,12 +8,38 @@ public class ShootFrench : MonoBehaviour
     [SerializeField] GameObject Muzzle;
     [SerializeField] float destroyAfter = 2f;
     [SerializeField] AudioClip shootSound;
+    [SerializeField] GameObject Mask;
+    private GameObject instance;
+
+    void Start()
+    {
+        if (target != null && Muzzle != null)
+        {
+            instance = Instantiate(target, Muzzle.transform.position, Muzzle.transform.rotation);
+            instance.SetActive(false);
+
+        }
+        Mask.SetActive(false);
+    }
 
     public void Shoot()
     {
-        GameObject instance = Instantiate(target, Muzzle.transform.position, Muzzle.transform.rotation);
+        if (target == null || Muzzle == null || instance == null)
+            return;
+
+        instance.SetActive(true);
         SoundFXManager.instance.PlayAudioClip(shootSound, transform, 1f);
-        if (destroyAfter > 0f)
-            Destroy(instance, destroyAfter);
+        StartCoroutine(DestroyAfterDelay());
+    }
+
+    IEnumerator DestroyAfterDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        instance.SetActive(false);
+    }
+
+    public void WearMask()
+    {
+        Mask.SetActive(true);
     }
 }
