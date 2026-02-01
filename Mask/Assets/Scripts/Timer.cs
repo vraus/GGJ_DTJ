@@ -44,6 +44,7 @@ public class Timer : MonoBehaviour
     {
         timerText.gameObject.SetActive(true);
         MaskGoal.Instance.StartCounting();
+        MaskLoad.Instance.StartCounting();
         isActive = true;
         StartCoroutine(Countdown());
     }

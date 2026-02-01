@@ -375,7 +375,7 @@ public class PlayerController : MonoBehaviour
         if (MasksCollected < MaxMasksCarriable)
         {
             MasksCollected++;
-            Debug.Log("Mask collected. Total: " + MasksCollected);
+            MaskLoad.Instance.IncrementeMaskLoad();
             SoundFXManager.instance.PlayAudioClip(maskCollectClip, maskTransform, 1f);
         }
     }
@@ -384,6 +384,7 @@ public class PlayerController : MonoBehaviour
     {
         CurrentTotalCollectedMasks++;
         MaskGoal.Instance.IncrementeMaskGoal();
+        MaskLoad.Instance.DecrementeMaskLoad();
         if (CurrentTotalCollectedMasks >= TotalMasks)
         {
             Timer.Instance.StopTimer();
