@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
 
             // Si le joueur se deplace
-            controller.Move(inputManager.GetPlayerMovement().y * UpLadder * ladderClimbSpeed * Time.deltaTime);
+            controller.Move(inputManager.GetPlayerMovement() * UpLadder * ladderClimbSpeed * Time.deltaTime);
         }
         else
         {
