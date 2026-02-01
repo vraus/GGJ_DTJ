@@ -10,6 +10,7 @@ public class MenuPause : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject stamina;
     [SerializeField] private GameObject LoseMenu;
+    [SerializeField] private GameObject WinMenu;
     [SerializeField] private Slider MasterVolumeSlider;
     [SerializeField] private Slider MusicVolumeSlider;
     [SerializeField] private Slider SFXVolumeSlider;
@@ -51,10 +52,26 @@ public class MenuPause : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Scene_Menu");
     }
 
+    public void TimerStopped()
+    {
+        if (playerController.GetCurretnTotalCollectedMasksWinCondition())
+            DisplayWinMenu();
+        else
+            playerController.PlayerDeath();
+    }
+
     public void DisplayLoseMenu()
     {
         Time.timeScale = 0f;
         LoseMenu.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void DisplayWinMenu()
+    {
+        Time.timeScale = 0f;
+        WinMenu.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }

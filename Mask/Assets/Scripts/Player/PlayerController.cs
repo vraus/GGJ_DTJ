@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
     [Header("Collectibles")]
     [SerializeField] internal int MasksCollected = 0;
     [SerializeField] internal int TotalMasks = 10;
+    [SerializeField] internal int CurrentTotalCollectedMasks = 0;
     [SerializeField] internal int MaxMasksCarriable = 3;
 
     [Header("Audio")]
@@ -377,6 +378,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void UpdateMaskMissionProgress()
+    {
+        CurrentTotalCollectedMasks++;
+    }
+
+    public bool GetCurretnTotalCollectedMasksWinCondition()
+    {
+        return CurrentTotalCollectedMasks >= TotalMasks;
+    }
+
     public void PlayerDeath()
     {
         isDead = true;
@@ -385,7 +396,6 @@ public class PlayerController : MonoBehaviour
 
         StopAllCoroutines();
         StartCoroutine(DeathCameraCoroutine());
-
     }
 
     public void PlayerInGazArea(bool inGaz)
@@ -525,6 +535,5 @@ public class PlayerController : MonoBehaviour
         if (pauseMenu != null)
             pauseMenu.TogglePauseMenu(isGamePaused);
     }
-
 
 }

@@ -56,7 +56,7 @@ public class Timer : MonoBehaviour
             UpdateDisplay();
         }
         UpdateDisplay();
-        playerController.PlayerDeath();
+        GetComponentInParent<MenuPause>().TimerStopped();
     }
 
     void UpdateDisplay()
