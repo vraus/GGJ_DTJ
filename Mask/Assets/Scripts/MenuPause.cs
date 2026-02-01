@@ -26,6 +26,7 @@ public class MenuPause : MonoBehaviour
 
     List<GameObject> FrenchSoldiers = new List<GameObject>();
     [SerializeField] CinematicManager cinematicManager;
+    [SerializeField] GameObject Playercamera;
 
     void Start()
     {
@@ -103,8 +104,10 @@ public class MenuPause : MonoBehaviour
         }
 
         //get cinematic manager and play end cinematic
-        playerController.GetComponentInChildren<Camera>().gameObject.SetActive(false);
+        //playerController.GetComponentInChildren<Camera>().gameObject.SetActive(false);
+        Playercamera.SetActive(false);
         cinematicManager.gameObject.SetActive(true);
+        Time.timeScale = 1f;
         cinematicManager.CameraCinematic.SetActive(true);
         cinematicManager.PlayEnd();
 

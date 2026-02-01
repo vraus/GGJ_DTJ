@@ -1223,6 +1223,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 473500701}
     - target: {fileID: 1979593221641174496, guid: 49e0cd2e21bc85249bfe8f8a35eb140f, type: 3}
+      propertyPath: Playercamera
+      value: 
+      objectReference: {fileID: 788838699}
+    - target: {fileID: 1979593221641174496, guid: 49e0cd2e21bc85249bfe8f8a35eb140f, type: 3}
       propertyPath: cinematicManager
       value: 
       objectReference: {fileID: 1547071121}
@@ -18986,7 +18990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7023921223398761459, guid: bb993b5a4603aee4b8d6b84d0a69a659, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8646263524065545750, guid: bb993b5a4603aee4b8d6b84d0a69a659, type: 3}
       propertyPath: m_LocalPosition.x
