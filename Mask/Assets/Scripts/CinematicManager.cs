@@ -17,6 +17,8 @@ public class CinematicManager : MonoBehaviour
     [SerializeField] TimelineAsset timelineAssetEnd;
     [SerializeField] GameObject Fog;
     PlayableDirector playableDirector;
+    private bool isEndCinematicPlaying = false;
+    private Coroutine endCinematicCoroutine;
 
     private static CinematicManager _instance;
 
@@ -61,6 +63,7 @@ public class CinematicManager : MonoBehaviour
         {
             playableDirector.playableAsset = timelineAssetStart;
             playableDirector.Play();
+            Debug.Log("CinematicManager: Playing start timeline");
         }
         else
         {
@@ -93,7 +96,14 @@ public class CinematicManager : MonoBehaviour
 
     public void PlayEnd()
     {
+        Debug.Log("CinematicManager: PlayEnd called");
+
         Fog.SetActive(true);
+
+        // Ensure the cinematic camera is active and player camera / HUD are disabled
+        if (CameraCinematic != null) CameraCinematic.SetActive(true);
+        if (CameraPlayer != null) CameraPlayer.SetActive(false);
+        if (Stamina != null) Stamina.SetActive(false);
 
         if (playableDirector == null)
             playableDirector = GetComponentInChildren<PlayableDirector>();
@@ -110,20 +120,30 @@ public class CinematicManager : MonoBehaviour
             return;
         }
 
-        // STOP la timeline actuelle
+        // Stop current timeline, assign the end timeline and play it
+        Debug.Log("CinematicManager: Starting end cinematic, timeline duration: " + timelineAssetEnd.duration);
         playableDirector.Stop();
-
-        // Change la timeline
         playableDirector.playableAsset = timelineAssetEnd;
-
-        // Reset le temps
         playableDirector.time = 0;
+        playableDirector.Play(timelineAssetEnd);
 
-        // Applique l'état immédiatement
-        playableDirector.Evaluate();
+        isEndCinematicPlaying = true;
+        if (endCinematicCoroutine != null)
+            StopCoroutine(endCinematicCoroutine);
+        endCinematicCoroutine = StartCoroutine(WaitForEndCinematicFinish());
+    }
 
-        // Joue la nouvelle timeline
-        playableDirector.Play();
+    private IEnumerator WaitForEndCinematicFinish()
+    {
+        yield return new WaitForSeconds((float)timelineAssetEnd.duration + 0.5f);
+
+        if (!isEndCinematicPlaying) yield break;
+
+        Debug.Log("CinematicManager: End cinematic finished");
+        isEndCinematicPlaying = false;
+        CameraCinematic.SetActive(false);
+        CameraPlayer.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void SetSubtitle(string text)
