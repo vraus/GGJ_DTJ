@@ -90,7 +90,7 @@ public class MenuPause : MonoBehaviour
 
         stamina.SetActive(false);
         PlayEndgameSound(loseAudioClip);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -112,7 +112,7 @@ public class MenuPause : MonoBehaviour
         MusicManager.instance.StopMusic();
         stamina.SetActive(false);
         PlayEndgameSound(winAudioClip);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
