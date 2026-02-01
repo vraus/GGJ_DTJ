@@ -3,12 +3,6 @@ using UnityEngine;
 
 public class PoisonGaz : MonoBehaviour
 {
-    Collider collider;
-
-    void Start()
-    {
-        collider = GetComponent<Collider>();
-    }
 
     void OnTriggerEnter(Collider other)
     {
