@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.VisualScripting;
+using NUnit.Framework;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -12,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [Header("Locomotion Variables")]
     [SerializeField] float playerWalkSpeed = 5.0f;
     [SerializeField] float playerSprintSpeed = 12.0f;
+    [SerializeField] float playerWalkinGazSpeed = 2.5f;
     [SerializeField] float DashHeight = 1.5f;
     [SerializeField] float gravityValue = -9.81f;
     bool isSprinting = false;
@@ -21,7 +24,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashDuration = 0.15f;
     [SerializeField] float dashCooldown = 1f;
     [SerializeField] float dashStaminaCost = 25f;
-
     float dashCooldownTimer = 0f;
     bool isDashing = false;
 
@@ -47,9 +49,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float deathCameraDrop = 0.3f;
     [SerializeField] float groundOffset = 0.08f;
     [SerializeField] LayerMask groundLayer;
+    bool isDead = false;
 
     [Header("UI Elements")]
     [SerializeField] GameObject menuPauseUI;
+
+    [Header("Gaz")]
+    [SerializeField] float gazStaminaDrainRate = 3f;
+    [SerializeField] float gazTimerBeforeDeath = 5f;
+    float gazDeathTimer = 0f;
+    bool isInGazArea = false;
+
 
     [Header("Stamina")]
     [SerializeField] Slider staminaSlider;
@@ -78,6 +88,7 @@ public class PlayerController : MonoBehaviour
     bool isOnLadder = false;
     Vector3 UpLadder;
 
+
     float sin;
     bool canPlayFootstep = true;
 
@@ -105,27 +116,18 @@ public class PlayerController : MonoBehaviour
         currentStamina = maxStamina;
         staminaSlider.value = currentStamina;
 
-
-        // inputManager.PlayerControls.Locomotion.Pause.performed += ctx =>
-        // {
-        //     if (isGamePaused)
-        //         isGamePaused = false;
-        //     else
-        //         isGamePaused = true;
-        // 
-        //     menuPauseUI.GetComponent<MenuPause>().TogglePauseMenu(isGamePaused);
-        // };
-
         inputManager.PlayerControls.Locomotion.Pause.performed += ctx => TogglePause();
     }
 
     void Update()
     {
-        if (controller == null || inputManager == null || isGamePaused || controller.enabled == false)
+        if (controller == null || inputManager == null || isGamePaused || controller.enabled == false || isDead)
             return;
 
         if (dashCooldownTimer > 0f)
             dashCooldownTimer -= Time.deltaTime;
+
+        CheckGazArea();
 
         Vector3 move = MoveAndRotatePlayer();
 
@@ -144,7 +146,7 @@ public class PlayerController : MonoBehaviour
             {
                 Sprint();
 
-                controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
+                controller.Move(move * (isSprinting ? playerSprintSpeed : (isInGazArea ? playerWalkinGazSpeed : playerWalkSpeed)) * Time.deltaTime);
 
                 // Gravité normale
                 playerVelocity.y += gravityValue * Time.deltaTime;
@@ -158,6 +160,13 @@ public class PlayerController : MonoBehaviour
 
         CameraBobbing(move);
         Dash();
+
+        if (currentStamina < maxStamina)
+        {
+            staminaRegenTimer += Time.deltaTime;
+            if (staminaRegenTimer >= staminaRegenThreshold)
+                RegenStamina(staminaRegenRate);
+        }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
@@ -196,34 +205,29 @@ public class PlayerController : MonoBehaviour
     void Sprint()
     {
 
+        if (isInGazArea)
+        {
+            isSprinting = false;
+            return;
+        }
+
         if (inputManager.IsSprintPressed() && currentStamina > 0 && inputManager.GetPlayerMovement().magnitude > 0.1f)
         {
             isSprinting = true;
-            currentStamina -= staminaDrainRate * Time.deltaTime;
-            if (currentStamina < 0)
-                currentStamina = 0;
+            DrainStamina(staminaDrainRate);
             staminaRegenTimer = 0;
         }
         else
         {
             isSprinting = false;
-            if (currentStamina < maxStamina)
-            {
-                staminaRegenTimer += Time.deltaTime;
-                if (staminaRegenTimer >= staminaRegenThreshold)
-                    currentStamina += staminaRegenRate * Time.deltaTime;
-            }
-            if (currentStamina > maxStamina)
-                currentStamina = maxStamina;
-        }
 
-        if (staminaSlider != null)
-            staminaSlider.value = currentStamina;
+        }
     }
 
     void Dash()
     {
-        staminaSlider.fillRect.GetComponent<Image>().color = Color.Lerp(staminaEmptyColor, staminaFullColor, currentStamina / maxStamina);
+        if (isInGazArea) return;
+
         if (inputManager.IsDashPressed() && groundedPlayer && !isDashing && dashCooldownTimer <= 0f && currentStamina >= dashStaminaCost)
         {
             StartCoroutine(PerformDash());
@@ -237,7 +241,7 @@ public class PlayerController : MonoBehaviour
 
         currentStamina -= dashStaminaCost;
         if (currentStamina < 0f) currentStamina = 0f;
-        if (staminaSlider != null) staminaSlider.value = currentStamina;
+        UpdateStaminaUI();
 
         Vector3 dashDir = transform.forward;
         dashDir.y = 0f;
@@ -300,6 +304,55 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void CheckGazArea()
+    {
+        if (isInGazArea)
+        {
+            DrainStamina(gazStaminaDrainRate);
+            if (currentStamina <= 0)
+            {
+                gazDeathTimer += Time.deltaTime;
+                if (gazDeathTimer >= gazTimerBeforeDeath)
+                    PlayerDeath();
+            }
+            else
+            {
+                gazDeathTimer = 0f;
+            }
+            staminaRegenTimer = 0;
+        }
+        else
+        {
+            gazDeathTimer = 0f;
+        }
+    }
+
+    void DrainStamina(float rate)
+    {
+        currentStamina -= rate * Time.deltaTime;
+        if (currentStamina < 0) currentStamina = 0;
+        UpdateStaminaUI();
+    }
+
+    void RegenStamina(float rate)
+    {
+        if (currentStamina < maxStamina)
+        {
+            currentStamina += rate * Time.deltaTime;
+            if (currentStamina > maxStamina) currentStamina = maxStamina;
+        }
+        UpdateStaminaUI();
+    }
+
+    void UpdateStaminaUI()
+    {
+        if (staminaSlider != null)
+        {
+            staminaSlider.value = currentStamina;
+            staminaSlider.fillRect.GetComponent<Image>().color = Color.Lerp(staminaEmptyColor, staminaFullColor, currentStamina / maxStamina);
+        }
+    }
+
     internal void AddMask(Transform maskTransform)
     {
         if (MasksCollected < MaxMasksCarriable)
@@ -312,13 +365,18 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerDeath()
     {
+        isDead = true;
         inputManager.DisableAllInputs();
         controller.enabled = false;
 
         StopAllCoroutines();
         StartCoroutine(DeathCameraCoroutine());
 
-        Debug.Log("Player has died.");
+    }
+
+    public void PlayerInGazArea(bool inGaz)
+    {
+        isInGazArea = inGaz;
     }
 
     public void PlayWalkingFootstepSound()
@@ -328,6 +386,7 @@ public class PlayerController : MonoBehaviour
 
         SoundFXManager.instance.PlayFootstep(footstepClip, transform.position, volume);
     }
+
 
     public void CameraShake(float magnitudeMultiplier = 1f)
     {
@@ -432,5 +491,6 @@ public class PlayerController : MonoBehaviour
         isGamePaused = !isGamePaused;
         menuPauseUI.GetComponent<MenuPause>().TogglePauseMenu(isGamePaused);
     }
+
 
 }
