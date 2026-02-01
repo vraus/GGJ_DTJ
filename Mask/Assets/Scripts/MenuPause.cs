@@ -70,6 +70,7 @@ public class MenuPause : MonoBehaviour
     {
         LoseMenu.SetActive(true);
         MusicManager.instance.StopMusic();
+        stamina.SetActive(false);
         PlayEndgameSound(loseAudioClip);
         Time.timeScale = 0f;
         Cursor.visible = true;
@@ -80,6 +81,7 @@ public class MenuPause : MonoBehaviour
     {
         WinMenu.SetActive(true);
         MusicManager.instance.StopMusic();
+        stamina.SetActive(false);
         PlayEndgameSound(winAudioClip);
         Time.timeScale = 0f;
         Cursor.visible = true;
