@@ -123,6 +123,7 @@ Transform:
   - {fileID: 1480088696738845595}
   - {fileID: 2425809741820016861}
   - {fileID: 98369684691728130}
+  - {fileID: 8861985412107074513}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3230872715111263951
@@ -137,7 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f43d0f676a6c19418a3129430121f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MortierManager
-  MortierPlace: {fileID: 0}
   MortierShadow: {fileID: 5243391863644146350}
   MortierExplosion: {fileID: 2424723396872249681}
   Player: {fileID: 0}
@@ -148,6 +148,37 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bbdc9cfaa88fca9488b019a98425b315, type: 3}
   - {fileID: 8300000, guid: cb3833f2c718b7548b307cf0cfa977c0, type: 3}
   - {fileID: 8300000, guid: 763098907dc0ca847946ab520955d0bd, type: 3}
+--- !u!1 &7778033372460598270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8861985412107074513}
+  m_Layer: 0
+  m_Name: TargetSafe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8861985412107074513
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778033372460598270}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 37.9, y: -1.2, z: 17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8646263524065545750}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &95567226040555742
 PrefabInstance:
   m_ObjectHideFlags: 0

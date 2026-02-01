@@ -7,6 +7,7 @@ public class MortierManager : MonoBehaviour
     [SerializeField] GameObject MortierExplosion;
     [SerializeField] GameObject Player;
     [SerializeField] GameObject SmokeEffect;
+    [SerializeField] GameObject Target;
 
     [Header("Audio Assets")]
     [SerializeField] AudioClip MortierTrail;
@@ -28,7 +29,7 @@ public class MortierManager : MonoBehaviour
         if (Player != null)
         {
             spawnTimer += Time.deltaTime;
-            if (spawnTimer >= spawnInterval)
+            if (spawnTimer >= spawnInterval && Player.transform.position.z < Target.transform.position.z)
             {
                 SpawnMortierShadow();
                 spawnTimer = 0f;
