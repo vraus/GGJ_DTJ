@@ -7,12 +7,16 @@ public class MenuPause : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private GameObject stamina;
+    [SerializeField] private GameObject LoseMenu;
 
     void Start()
     {
         if (pauseMenuUI != null)
         {
             pauseMenuUI.SetActive(false);
+            stamina.SetActive(true);
+            LoseMenu.SetActive(false);
         }
     }
 
@@ -28,6 +32,12 @@ public class MenuPause : MonoBehaviour
     {
         Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Scene_Menu");
+    }
+
+    public void PlayAgain()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Scene_Gameplay");
     }
 
     public void ResumeGame()
