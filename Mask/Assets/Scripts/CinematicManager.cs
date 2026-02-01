@@ -45,6 +45,9 @@ public class CinematicManager : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.outputAudioMixerGroup = soundEffectsMixerGroup;
         musicSource.outputAudioMixerGroup = musicMixerGroup;
+
+        audioSource.volume += 1f;
+        musicSource.volume /= 2f;
         Say();
     }
 
@@ -72,7 +75,6 @@ public class CinematicManager : MonoBehaviour
         }
 
         subtitles.SetActive(false);
-        // Play music after the radio script
         audioSource.clip = musicSource.clip;
         audioSource.loop = true;
         audioSource.Play();
