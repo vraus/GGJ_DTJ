@@ -100,6 +100,11 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     System.Action<UnityEngine.InputSystem.InputAction.CallbackContext> pauseCallback;
 
+    void Start()
+    {
+        StartPlay();
+    }
+
     public void StartPlay()
     {
         staminaFullColor = staminaSlider.fillRect.GetComponent<Image>().color;
