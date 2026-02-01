@@ -5,6 +5,9 @@ using UnityEngine.Audio;
 
 public class CinematicManager : MonoBehaviour
 {
+    [SerializeField] GameObject CameraPlayer;
+    [SerializeField] GameObject CameraCinematic;
+    [SerializeField] GameObject Stamina;
     private static CinematicManager _instance;
 
     public static CinematicManager Instance
@@ -36,7 +39,11 @@ public class CinematicManager : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
-        Say();
+        CameraCinematic.SetActive(true);
+        CameraPlayer.SetActive(false);
+        Stamina.SetActive(false);
+        subtitles.SetActive(false);
+        //Say();
     }
 
     public void SetSubtitle(string text)

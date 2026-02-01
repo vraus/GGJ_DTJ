@@ -20,7 +20,6 @@ public class MenuPause : MonoBehaviour
         if (pauseMenuUI != null)
         {
             pauseMenuUI.SetActive(false);
-            stamina.SetActive(true);
             LoseMenu.SetActive(false);
         }
 
