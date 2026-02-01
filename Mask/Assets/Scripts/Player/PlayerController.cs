@@ -16,6 +16,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float gravityValue = -9.81f;
     bool isSprinting = false;
 
+    [Header("Dash")]
+    [SerializeField] float dashDistance = 5f;
+    [SerializeField] float dashDuration = 0.15f;
+    [SerializeField] float dashCooldown = 1f;
+    [SerializeField] float dashStaminaCost = 25f;
+
+    float dashCooldownTimer = 0f;
+    bool isDashing = false;
+
     [Header("Camera Look")]
     [SerializeField] float mouseSensitivity = 100.0f;
 
@@ -48,6 +57,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float staminaDrainRate = 30f;
     [SerializeField] float staminaRegenRate = 15f;
     [SerializeField] float staminaRegenThreshold = 2f;
+    Color staminaFullColor;
+    Color staminaEmptyColor = Color.red;
     float staminaRegenTimer = 0f;
     float currentStamina;
 
@@ -79,6 +90,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        staminaFullColor = staminaSlider.fillRect.GetComponent<Image>().color;
         controller = gameObject.GetComponent<CharacterController>();
 
         inputManager = InputManager.Instance;
@@ -112,28 +124,33 @@ public class PlayerController : MonoBehaviour
         if (controller == null || inputManager == null || isGamePaused || controller.enabled == false)
             return;
 
+        if (dashCooldownTimer > 0f)
+            dashCooldownTimer -= Time.deltaTime;
+
         Vector3 move = MoveAndRotatePlayer();
 
         // --- LADDERS ---
-        if (isOnLadder && UpLadder!=null)
+        if (isOnLadder && UpLadder != null)
         {
             // On annule la gravité
             playerVelocity.y = 0f;
 
             // Si le joueur se deplace
             controller.Move(inputManager.GetPlayerMovement().y * UpLadder * ladderClimbSpeed * Time.deltaTime);
-            
         }
         else
         {
-            if (move.magnitude > 0.1f)
-                Sprint();
+            if (!isDashing)
+            {
+                if (move.magnitude > 0.1f)
+                    Sprint();
 
-            controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
+                controller.Move(move * (isSprinting ? playerSprintSpeed : playerWalkSpeed) * Time.deltaTime);
 
-            // Gravité normale
-            playerVelocity.y += gravityValue * Time.deltaTime;
-            controller.Move(playerVelocity * Time.deltaTime);
+                // Gravité normale
+                playerVelocity.y += gravityValue * Time.deltaTime;
+                controller.Move(playerVelocity * Time.deltaTime);
+            }
         }
         if (move.magnitude > 0)
         {
@@ -206,10 +223,40 @@ public class PlayerController : MonoBehaviour
 
     void Dash()
     {
-        if (inputManager.IsDashPressed() && groundedPlayer)
+        staminaSlider.fillRect.GetComponent<Image>().color = Color.Lerp(staminaEmptyColor, staminaFullColor, currentStamina / maxStamina);
+        if (inputManager.IsDashPressed() && groundedPlayer && !isDashing && dashCooldownTimer <= 0f && currentStamina >= dashStaminaCost)
         {
-            // Dash logic
+            StartCoroutine(PerformDash());
         }
+    }
+
+    IEnumerator PerformDash()
+    {
+        isDashing = true;
+        dashCooldownTimer = dashCooldown;
+
+        currentStamina -= dashStaminaCost;
+        if (currentStamina < 0f) currentStamina = 0f;
+        if (staminaSlider != null) staminaSlider.value = currentStamina;
+
+        Vector3 dashDir = transform.forward;
+        dashDir.y = 0f;
+        dashDir.Normalize();
+
+        float elapsed = 0f;
+        float speed = dashDistance / Mathf.Max(dashDuration, 0.0001f);
+
+        // small upward push if desired
+        playerVelocity.y = DashHeight;
+
+        while (elapsed < dashDuration)
+        {
+            controller.Move(dashDir * speed * Time.deltaTime);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        isDashing = false;
     }
 
     void CameraBobbing(Vector3 move)
@@ -362,7 +409,7 @@ public class PlayerController : MonoBehaviour
         {
             isOnLadder = true;
             playerVelocity.y = 0f; // reset propre
-            UpLadder=other.transform.up;
+            UpLadder = other.transform.up;
         }
     }
 
