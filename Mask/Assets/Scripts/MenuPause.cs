@@ -51,6 +51,14 @@ public class MenuPause : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Scene_Menu");
     }
 
+    public void DisplayLoseMenu()
+    {
+        Time.timeScale = 0f;
+        LoseMenu.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void PlayAgain()
     {
         Time.timeScale = 1f;

@@ -1,11 +1,10 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Timer : MonoBehaviour
 {
-
+    [SerializeField] PlayerController playerController;
     private static Timer instance;
 
     public static Timer Instance
@@ -18,7 +17,7 @@ public class Timer : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] float timer = 300f;
+    [SerializeField] float timer = 5f;
     bool isActive = false;
     private float timeRemaining;
 
@@ -57,6 +56,7 @@ public class Timer : MonoBehaviour
             UpdateDisplay();
         }
         UpdateDisplay();
+        playerController.PlayerDeath();
     }
 
     void UpdateDisplay()

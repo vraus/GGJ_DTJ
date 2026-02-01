@@ -474,6 +474,8 @@ public class PlayerController : MonoBehaviour
 
         cam.rotation = targetRot;
         cam.position = targetWorldPos;
+
+        menuPauseUI.GetComponent<MenuPause>().DisplayLoseMenu();
     }
 
     private void OnTriggerEnter(Collider other)
