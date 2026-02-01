@@ -19,7 +19,10 @@ public class ShootFrench : MonoBehaviour
             instance.SetActive(false);
 
         }
-        Mask.SetActive(false);
+        if (Mask != null)
+        {
+            Mask.SetActive(false);
+        }
     }
 
     public void Shoot()
