@@ -324,7 +324,7 @@ public class PlayerController : MonoBehaviour
     public void PlayWalkingFootstepSound()
     {
         AudioClip footstepClip = walkFootstepClips[UnityEngine.Random.Range(0, walkFootstepClips.Length)];
-        float volume = 1f;
+        float volume = 0.7f;
 
         SoundFXManager.instance.PlayFootstep(footstepClip, transform.position, volume);
     }

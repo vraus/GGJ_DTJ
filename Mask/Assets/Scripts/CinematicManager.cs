@@ -21,13 +21,6 @@ public class CinematicManager : MonoBehaviour
     [SerializeField] private AudioObject[] radioScriptAudioClips;
     private AudioSource audioSource;
 
-    [Header("Music")]
-    [SerializeField] private AudioSource musicSource;
-
-    [Header("Settings")]
-    [SerializeField] AudioMixerGroup soundEffectsMixerGroup;
-    [SerializeField] AudioMixerGroup musicMixerGroup;
-
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -43,11 +36,6 @@ public class CinematicManager : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.outputAudioMixerGroup = soundEffectsMixerGroup;
-        musicSource.outputAudioMixerGroup = musicMixerGroup;
-
-        audioSource.volume += 1f;
-        musicSource.volume /= 2f;
         Say();
     }
 
@@ -75,9 +63,10 @@ public class CinematicManager : MonoBehaviour
         }
 
         subtitles.SetActive(false);
-        audioSource.clip = musicSource.clip;
-        audioSource.loop = true;
-        audioSource.Play();
+        audioSource.Stop();
+        Destroy(audioSource);
+
+        MusicManager.instance.PlayMusic();
     }
 
     private IEnumerator PlayAudioWithSubtitles(AudioObject clip)

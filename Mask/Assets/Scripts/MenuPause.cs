@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuPause : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class MenuPause : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject stamina;
     [SerializeField] private GameObject LoseMenu;
+    [SerializeField] private Slider MasterVolumeSlider;
+    [SerializeField] private Slider MusicVolumeSlider;
+    [SerializeField] private Slider SFXVolumeSlider;
+    [SerializeField] private SoundMixerManager soundMixerManager;
 
     void Start()
     {
@@ -17,6 +22,19 @@ public class MenuPause : MonoBehaviour
             pauseMenuUI.SetActive(false);
             stamina.SetActive(true);
             LoseMenu.SetActive(false);
+        }
+
+        if (soundMixerManager != null)
+        {
+            // Initialize volume sliders with current mixer values
+            float masterVolume, musicVolume, sfxVolume;
+            soundMixerManager.audioMixer.GetFloat("masterVolume", out masterVolume);
+            soundMixerManager.audioMixer.GetFloat("musicVolume", out musicVolume);
+            soundMixerManager.audioMixer.GetFloat("sfxVolume", out sfxVolume);
+
+            MasterVolumeSlider.value = masterVolume;
+            MusicVolumeSlider.value = musicVolume;
+            SFXVolumeSlider.value = sfxVolume;
         }
     }
 
