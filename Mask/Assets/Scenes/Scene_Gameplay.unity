@@ -1288,7 +1288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3120203186156405259, guid: 49e0cd2e21bc85249bfe8f8a35eb140f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -19.672998
+      value: -19.696417
       objectReference: {fileID: 0}
     - target: {fileID: 3264889439530589253, guid: 49e0cd2e21bc85249bfe8f8a35eb140f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1400,7 +1400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4105455495386815579, guid: 49e0cd2e21bc85249bfe8f8a35eb140f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -19.672998
+      value: -19.696417
       objectReference: {fileID: 0}
     - target: {fileID: 4114857923720128722, guid: 49e0cd2e21bc85249bfe8f8a35eb140f, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1420,7 +1420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4114857923720128722, guid: 49e0cd2e21bc85249bfe8f8a35eb140f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -19.672998
+      value: -19.696417
       objectReference: {fileID: 0}
     - target: {fileID: 4156721131102508055, guid: 49e0cd2e21bc85249bfe8f8a35eb140f, type: 3}
       propertyPath: m_Name
@@ -1764,7 +1764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6798798112440636046, guid: 49e0cd2e21bc85249bfe8f8a35eb140f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -19.672998
+      value: -19.696417
       objectReference: {fileID: 0}
     - target: {fileID: 6811371699922139157, guid: 49e0cd2e21bc85249bfe8f8a35eb140f, type: 3}
       propertyPath: m_AnchorMax.y
@@ -28034,7 +28034,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1496107924}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 11acac5d3151f534f8a0ac5c78d15d1b, type: 2}
+  m_PlayableAsset: {fileID: 0}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -28141,7 +28141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39afd95fc3532fd43b65329e7ce0f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
-  playerController: {fileID: 0}
+  playerController: {fileID: 421727415}
   timerText: {fileID: 1737044601}
   timer: 300
 --- !u!1001 &1499037487
