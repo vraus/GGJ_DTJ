@@ -88,6 +88,7 @@ public class MenuPause : MonoBehaviour
         cinematicManager.CameraCinematic.SetActive(true);
         cinematicManager.PlayEnd();
 
+        stamina.SetActive(false);
         PlayEndgameSound(loseAudioClip);
         Time.timeScale = 0f;
         Cursor.visible = true;
@@ -109,6 +110,7 @@ public class MenuPause : MonoBehaviour
 
         WinMenu.SetActive(true);
         MusicManager.instance.StopMusic();
+        stamina.SetActive(false);
         PlayEndgameSound(winAudioClip);
         Time.timeScale = 0f;
         Cursor.visible = true;

@@ -123,6 +123,8 @@ public class PlayerController : MonoBehaviour
         currentStamina = maxStamina;
         staminaSlider.value = currentStamina;
 
+        MaskGoal.Instance.SetMaximumMasks(TotalMasks);
+
         pauseCallback = ctx => TogglePause();
         if (inputManager != null && inputManager.PlayerControls != null)
         {
@@ -373,7 +375,7 @@ public class PlayerController : MonoBehaviour
         if (MasksCollected < MaxMasksCarriable)
         {
             MasksCollected++;
-            Debug.Log("Mask collected. Total: " + MasksCollected);
+            MaskLoad.Instance.IncrementeMaskLoad();
             SoundFXManager.instance.PlayAudioClip(maskCollectClip, maskTransform, 1f);
         }
     }
@@ -381,6 +383,8 @@ public class PlayerController : MonoBehaviour
     public void UpdateMaskMissionProgress()
     {
         CurrentTotalCollectedMasks++;
+        MaskGoal.Instance.IncrementeMaskGoal();
+        MaskLoad.Instance.DecrementeMaskLoad();
         if (CurrentTotalCollectedMasks >= TotalMasks)
         {
             Timer.Instance.StopTimer();
