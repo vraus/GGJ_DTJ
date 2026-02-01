@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class CinematicManager : MonoBehaviour
 {
@@ -20,6 +21,13 @@ public class CinematicManager : MonoBehaviour
     [SerializeField] private AudioObject[] radioScriptAudioClips;
     private AudioSource audioSource;
 
+    [Header("Music")]
+    [SerializeField] private AudioSource musicSource;
+
+    [Header("Settings")]
+    [SerializeField] AudioMixerGroup soundEffectsMixerGroup;
+    [SerializeField] AudioMixerGroup musicMixerGroup;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -35,6 +43,8 @@ public class CinematicManager : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.outputAudioMixerGroup = soundEffectsMixerGroup;
+        musicSource.outputAudioMixerGroup = musicMixerGroup;
         Say();
     }
 
@@ -60,6 +70,12 @@ public class CinematicManager : MonoBehaviour
             StartCoroutine(PlayAudioWithSubtitles(clip));
             yield return new WaitForSeconds(clip.audioClip.length);
         }
+
+        subtitles.SetActive(false);
+        // Play music after the radio script
+        audioSource.clip = musicSource.clip;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     private IEnumerator PlayAudioWithSubtitles(AudioObject clip)

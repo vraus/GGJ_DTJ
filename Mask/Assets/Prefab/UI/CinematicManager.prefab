@@ -55,3 +55,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2791f41fc5aeca5479f3bedee32f0067, type: 2}
   - {fileID: 11400000, guid: 3f2ba79b182b95b42bcc9c5b372332e8, type: 2}
   - {fileID: 11400000, guid: 3eea62e8d873e8543be4918da3b1f18c, type: 2}
+  musicSource: {fileID: 8794730957654222334, guid: 12ef37d092dd08e46941c1909afc8671, type: 3}
+  soundEffectsMixerGroup: {fileID: -4561218195449583887, guid: adcc66e142e8d0848b8c9d47b74a5af8, type: 2}
+  musicMixerGroup: {fileID: -4480493219831331767, guid: adcc66e142e8d0848b8c9d47b74a5af8, type: 2}
